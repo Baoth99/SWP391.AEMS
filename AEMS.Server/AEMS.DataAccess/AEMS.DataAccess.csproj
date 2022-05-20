@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AEMS.Data.EF\AEMS.Data.EF.csproj" />
+    <ProjectReference Include="..\AEMS.Data\AEMS.Data.csproj" />
+    <ProjectReference Include="..\AEMS.ORM.Dapper\AEMS.ORM.Dapper.csproj" />
+    <ProjectReference Include="..\AEMS.Utilities\AEMS.Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\CommandDTOs\" />
+  </ItemGroup>
+
+</Project>
