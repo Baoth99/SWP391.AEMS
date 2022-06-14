@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-
 using Amazon.Lambda.Core;
+using Microsoft.Azure.Cosmos;
 
+// AEMS.Monitors::AEMS.Monitors.Function::FunctionHandler
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
 
@@ -12,6 +11,38 @@ namespace AEMS.Monitors
 {
     public class Function
     {
+        /// <summary>
+        /// The cosmos database connection
+        /// </summary>
+        public static string CosmosDBConnection = Environment.GetEnvironmentVariable("CosmosDBConnection");
+
+        /// <summary>
+        /// The cosmos database
+        /// </summary>
+        public static string CosmosDatabase = Environment.GetEnvironmentVariable("CosmosDatabase");
+
+        /// <summary>
+        /// The cosmos container
+        /// </summary>
+        public static string CosmosContainer = Environment.GetEnvironmentVariable("CosmosContainer");
+
+        /// <summary>
+        /// The aws access key
+        /// </summary>
+        public static string AWSAccessKey = Environment.GetEnvironmentVariable("AWSAccessKey");
+
+        /// <summary>
+        /// The aws secret key
+        /// </summary>
+        public static string AWSSecretKey = Environment.GetEnvironmentVariable("AWSSecretKey");
+
+        /// <summary>
+        /// Gets the date time now.
+        /// </summary>
+        /// <value>
+        /// The date time now.
+        /// </value>
+        public static DateTime DateTimeNow => string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TimeZoneInfo")) ? TimeZoneInfo.ConvertTime(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById(Environment.GetEnvironmentVariable("TimeZoneInfo"))) : DateTime.UtcNow;
 
         /// <summary>
         /// A simple function that takes a string and does a ToUpper
@@ -19,9 +50,62 @@ namespace AEMS.Monitors
         /// <param name="input"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public void FunctionHandler(AEMSDeviceMessageRequestModel requestModel, ILambdaContext context)
+        public async Task FunctionHandler(AEMSDeviceMessageRequestModel requestModel, ILambdaContext context)
         {
-            Console.WriteLine(requestModel.Message.ToUpper());
+            using (CosmosClient client = new CosmosClient(connectionString: CosmosDBConnection))
+            {
+                try
+                {
+                    var container = client.GetContainer(CosmosDatabase, CosmosContainer);
+
+                    if (requestModel.Status == 2)
+                    {
+                        // Update status in DB
+                    }
+
+                    var document = new DeviceLogDocument()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        CreatedAt = requestModel.CreatedAt,
+                        DeviceId = requestModel.DeviceId,
+                        EventTime = requestModel.EventTime,
+                        EventType = requestModel.EventType,
+                        Message = requestModel.Message,
+                        ReceivedAt = DateTimeNow,
+                        Status = requestModel.Status,
+                        StatusMessage = requestModel.StatusMessage,
+
+                        BatteryLevel = requestModel.BatteryLevel,
+                        Power = requestModel.Power,
+                        Energy = requestModel.Energy,
+                        Voltage = requestModel.Voltage,
+                        MeterType = requestModel.MeterType,
+                        Version = requestModel.Version,
+
+                        Latitude = requestModel.Geolocation.Latitude,
+                        Longitude = requestModel.Geolocation.Longitude,
+                        Altitude = requestModel.Geolocation.Altitude,
+                        Magnetometer_x = requestModel.Magnetometer.x,
+                        Magnetometer_y = requestModel.Magnetometer.y,
+                        Magnetometer_z = requestModel.Magnetometer.z,   
+                    };
+
+                    var newItem = await container.CreateItemAsync<DeviceLogDocument>(document, new PartitionKey(document.DeviceId));
+                    if (newItem.StatusCode == System.Net.HttpStatusCode.Created)
+                    {
+                        LambdaLogger.Log($"Message is created at {requestModel.CreatedAt} from {requestModel.DeviceId} was got at {DateTimeNow} successfully !");
+                    }
+                    else
+                    {
+                        LambdaLogger.Log($"Fail to get message from {requestModel.DeviceId} at {DateTimeNow}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LambdaLogger.Log(ex.Message);
+                }
+            }
+
         }
     }
 }

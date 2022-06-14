@@ -17,7 +17,7 @@ namespace AEMS.WebApi.SystemConfigurations
 
             app.UseExceptionHandler(appError =>
             {
-                appError.Run(async context =>
+                appError.Run(async (context) =>
                 {
                     context.Response.StatusCode = HttpStatusCodes.BadRequest;
                     context.Response.ContentType = ApplicationRestfulApi.ApplicationProduce;

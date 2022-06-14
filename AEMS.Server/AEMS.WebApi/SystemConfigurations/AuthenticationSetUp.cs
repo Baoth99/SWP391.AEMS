@@ -1,5 +1,6 @@
 ﻿using AEMS.Utilities;
 using AEMS.WebApi.AuthenticationFilter;
+using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Web;
@@ -28,12 +29,22 @@ namespace AEMS.WebApi.SystemConfigurations
                         {
                             OnAuthenticationFailed = (context) =>
                             {
-                                // TODO:
-                                // Logging in Azure Application Insight
+                                var requestTelemetry = context.HttpContext.Features.Get<RequestTelemetry>();
+                                if (requestTelemetry != null)
+                                {
+                                    var properties = requestTelemetry.Properties;
+                                    properties["Authentication"] = "Logging Fail";
+                                }
                                 return Task.CompletedTask;
                             },
                             OnTokenValidated = (context) =>
                             {
+                                var requestTelemetry = context.HttpContext.Features.Get<RequestTelemetry>();
+                                if (requestTelemetry != null)
+                                {
+                                    var properties = requestTelemetry.Properties;
+                                    properties["Authentication"] = "Logging Passs";
+                                }
                                 return Task.CompletedTask;
                             },
                         };

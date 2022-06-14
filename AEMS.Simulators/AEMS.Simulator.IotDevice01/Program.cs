@@ -1,4 +1,5 @@
 ﻿using AEMS.Simulator.Core;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
@@ -13,9 +14,9 @@ namespace AEMS.Simulator.IotDevice01
 
         public static MqttClient MqttClient;
         public static string Password = "123";
-        public static string DeviceCode = "AEMS_DEVICE_01";
-        public static string Topic = "demo";
-
+        public static string DeviceCode = "SMFPTSWP0012";
+        public static string Topic = "equipment-log/";
+        public static bool IsActive = true;
         static void Main(string[] args)
         {
             var mqttConnectionModel = new MQTTConnectionRequestModel()
@@ -31,23 +32,48 @@ namespace AEMS.Simulator.IotDevice01
             // Connect to AWS IOT Core
             MqttClient.ConnectToMQTTServer(DeviceCode);
 
+
+            //Connected=0  //Standby=1 //Disconnected=2
+
             // Model to test
-            var requestModel = new EquipmentMessageRequestModel()
+            var requestModel = new DeviceMessageRequestModel()
             {
-                Id = DeviceCode,
+                DeviceId = DeviceCode,
                 CreatedAt = DateTimeCountry.DateTimeNow(),
                 EventTime = DateTimeCountry.DateTimeNow(),
                 EventType = 1,
                 Message = $"{DeviceCode} is runing very well",
-                Status = 1
-            };
+                Status = DeviceStatus.Standby,
+                StatusMessage = DeviceStatusMesage.Standby,
+                BatteryLevel = 89,
+                Energy = (float)63.44,
+                Power = (float)85.68,
+                Voltage = (float)121.67,
 
+                Geolocation = new Location()
+                {
+                    Latitude = (decimal)10.770345728051746,
+                    Longitude = (decimal)106.63607831476031,
+                    Altitude = (decimal)7.90
+                },
+                Magnetometer = new Coordinate()
+                {
+                    x = (decimal)43.44,
+                    y = (decimal)-90.6,
+                    z = (decimal)-28.31
+                },
+                MeterType = "3S",
+                Version = 1.0F,
+            };
+            
+            MqttClient.MqttPublishMessage<DeviceMessageRequestModel>(requestModel, Topic);
+            System.Console.WriteLine("Done");
             // Run to check message
-            while (true)
-            {
-                MqttClient.MqttPublishMessage(requestModel, Topic);
-                Thread.Sleep(5000);
-            }
+            //while (true)
+            //{
+            //    MqttClient.MqttPublishMessage(requestModel, Topic);
+            //    Thread.Sleep(5000);
+            //}
         }
     }
 }

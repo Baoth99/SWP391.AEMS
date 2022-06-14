@@ -1,4 +1,6 @@
-﻿using AEMS.Utilities;
+﻿using AEMS.Data.EF.Repositories;
+using AEMS.Data.Entities;
+using AEMS.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
@@ -48,8 +50,13 @@ namespace AEMS.Data.EF.UnitOfWork
 
         #region Private variable Repositories
 
+        IRepository<Device> _deviceRepository;
 
+        IRepository<DeviceCategory> _deviceCategoryRepository;
 
+        IRepository<Area> _areaRepository;
+
+        IRepository<Photo> _photoRepository;
 
         #endregion
 
@@ -71,8 +78,13 @@ namespace AEMS.Data.EF.UnitOfWork
 
         #region Publish Access Repositories
 
+        public IRepository<Device> DeviceRepository => _deviceRepository ??= (_deviceRepository = new Repository<Device>(AppDbContext));
 
+        public IRepository<DeviceCategory> DeviceCategoryRepository => _deviceCategoryRepository ??= (_deviceCategoryRepository = new Repository<DeviceCategory>(AppDbContext));
 
+        public IRepository<Area> AreaRepository => _areaRepository ??= (_areaRepository = new Repository<Area>(AppDbContext));
+
+        public IRepository<Photo> PhotoRepository => _photoRepository ??= (_photoRepository = new Repository<Photo>(AppDbContext));
 
         #endregion
 

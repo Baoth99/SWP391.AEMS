@@ -1,14 +1,20 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace AEMS.Monitors
 {
-    public class AEMSDeviceMessageRequestModel
+    public class DeviceLogDocument
     {
-        public string DeviceId { get; set; } // Device ID
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        public string DeviceId { get; set; } // Device Code
+
+        public DateTime EventTime { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
-        public DateTime EventTime { get; set; }
+        public DateTime ReceivedAt { get; set; }
 
         public int EventType { get; set; }
 
@@ -26,31 +32,22 @@ namespace AEMS.Monitors
 
         public float Voltage { get; set; } // V
 
-        public Location Geolocation { get; set; }
-
         public string MeterType { get; set; }
-
-        public Coordinate Magnetometer { get; set; }
 
         public float Version { get; set; }
 
-    }
-
-    public class Coordinate
-    {
-        public decimal x { get; set; }
-
-        public decimal y { get; set; }
-
-        public decimal z { get; set; }
-    }
-
-    public class Location
-    {
+        // Geolocation
         public decimal Latitude { get; set; }
 
         public decimal Longitude { get; set; }
 
         public decimal Altitude { get; set; }
+
+
+        public decimal Magnetometer_x { get; set; }
+
+        public decimal Magnetometer_y { get; set; }
+
+        public decimal Magnetometer_z { get; set; }
     }
 }

@@ -25,7 +25,8 @@ namespace AEMS.Simulator.Core
         public static void MqttPublishMessage<T>(this MqttClient client, T model, string topic)
         {
             Console.WriteLine("AWS IoT Dotnet core message publisher starting");
-            client.Publish(topic, Encoding.UTF8.GetBytes($"{JsonConvert.SerializeObject(model)}"));
+            client.Publish(topic, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(model)));
+            Console.WriteLine(JsonConvert.SerializeObject(model));
             Console.WriteLine($"Successfully published message!");
         }
 
@@ -38,6 +39,7 @@ namespace AEMS.Simulator.Core
                 client.Publish(topic, Encoding.UTF8.GetBytes($"{JsonConvert.SerializeObject(model)}"));
                 Console.WriteLine($"Successfully published message {i} !");
                 Thread.Sleep(sleep);
+                i++;
             }
             Console.WriteLine("Publish mutiple messages done !");
         }

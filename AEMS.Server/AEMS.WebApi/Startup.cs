@@ -1,5 +1,4 @@
 using AEMS.DataAccess;
-using AEMS.DataAccess.Queries;
 using AEMS.Utilities;
 using AEMS.WebApi.SystemConfigurations;
 using MediatR;
@@ -77,6 +76,18 @@ namespace AEMS.WebApi
 
             #endregion
 
+            services.AddSignalR()
+                    .AddAzureSignalR(opt =>
+                    {
+                        opt.ConnectionString = AppSettingValues.AzureSignalRConnection;
+                    });
+
+            services.AddApplicationInsightsTelemetry(x =>
+            {
+                x.ConnectionString = AppSettingValues.ApplicationInsightsConnectionString;
+                x.InstrumentationKey = AppSettingValues.ApplicationInsightsInstrumentationKey;
+            });
+
             #region Authentication
 
             services.AddAuthenticationSetUp();
@@ -107,13 +118,12 @@ namespace AEMS.WebApi
             app.UseSwaggerGenSetUp();
 
             app.UseExceptionHandlerSetUp();
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

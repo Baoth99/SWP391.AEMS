@@ -24,7 +24,7 @@ namespace AEMS.ORM.Dapper
         /// </summary>
         public DapperBaseService()
         {
-            SqlConnectionString = AppSettingValues.SqlConnectionString;
+            SqlConnectionString = AppSettingValues.SqlConnectionString ?? Environment.GetEnvironmentVariable("SQLConnectionString");
         }
 
         #endregion
