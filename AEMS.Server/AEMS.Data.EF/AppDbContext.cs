@@ -46,11 +46,11 @@ namespace AEMS.Data.EF
 
         #region DbSet
 
-        public DbSet<Area> Area { get; set; }
-        public DbSet<Equipment> Equipment { get; set; }
-        public DbSet<EquipmentCategory> EquipmentCategory { get; set; }
-        public DbSet<EquipmentLog> EquipmentLog { get; set; }
-        public DbSet<Photo> Photo { get; set; }
+        public virtual DbSet<Area> Area { get; set; }
+        public virtual DbSet<DeviceStatus> DeviceStatus { get; set; }
+        public virtual DbSet<Device> Device { get; set; }
+        public virtual DbSet<DeviceCategory> DeviceCategory { get; set; }
+        public virtual DbSet<Photo> Photo { get; set; }
 
         #endregion
 
@@ -75,7 +75,8 @@ namespace AEMS.Data.EF
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(AppSettingValues.SqlConnectionString, builder =>
+                var connectionString = "Data Source=aems.csyfrkxhnsrx.ap-southeast-1.rds.amazonaws.com;Initial Catalog=AEMS-DB;User ID=admin;Password=12345678;MultipleActiveResultSets=true";
+                optionsBuilder.UseSqlServer(connectionString, builder =>
                 {
                     builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
                 });
@@ -101,6 +102,8 @@ namespace AEMS.Data.EF
         /// </remarks>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<DeviceCategory>().HasKey(k => new { k.Code, k.Id});
+            modelBuilder.Entity<Device>().HasKey(k => new { k.Code, k.Id});
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {

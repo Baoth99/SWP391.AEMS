@@ -21,17 +21,18 @@ namespace AEMS.WebApi.SystemConfigurations
                 throw new ArgumentException(nameof(services));
             }
 
-            //services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IDapperService, DapperService>();
             services.AddScoped<IAuthSession, AuthSession>();
 
-            services.AddScoped<IEquipmentService, EquipmentService>();
+            services.AddScoped<IDeviceService, DeviceService>();
 
             #region MS Azure
 
             var confidential = ConfidentialClientApplicationBuilder.Create(AppSettingValues.AadClientId)
                                                                     .WithTenantId(AppSettingValues.AadTenantId)
                                                                     .WithClientSecret(AppSettingValues.AadClientSecret)
+                                                                    .WithAuthority($"{AppSettingValues.AadInstance}{AppSettingValues.AadTenantId}/")
                                                                     .Build();
             services.AddSingleton<IConfidentialClientApplication>(confidential);
 

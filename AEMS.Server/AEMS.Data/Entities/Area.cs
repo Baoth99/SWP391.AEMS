@@ -16,6 +16,8 @@ namespace AEMS.Data.Entities
 
         public string Name { get; set; }
 
+        public string Region { get; set; }
+
         public string Description { get; set; }
     }
 }

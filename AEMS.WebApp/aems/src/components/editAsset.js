@@ -5,6 +5,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+<<<<<<< HEAD
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -33,6 +34,23 @@ const MaxWidthDialog = ({ isDialogOpened, handleCloseDialog, items }) => {
     // dispatch(assetUpdate(items[0]?.id))
   })
 
+=======
+
+export default function MaxWidthDialog({ isDialogOpened, handleCloseDialog, items }) {
+  useEffect(() => {
+    handleClickOpen();
+  }, []);
+
+  //const classes = useStyles();
+  //const [open, setOpen] = React.useState(false);
+  const [fullWidth, setFullWidth] = React.useState(true);
+  const [maxWidth] = React.useState("sm");
+
+  const handleClickOpen = () => {
+    //setOpen(true);
+    //setTimeout(() => setOpen(false), 16000);
+  };
+>>>>>>> dc89784e4e15922c837e0beaeac02034fce51c24
 
   const handleClose = () => {
     handleCloseDialog(false);

@@ -1,16 +1,25 @@
+
 {
-  "Information": [
-    "This file provides default values for the deployment wizard inside Visual Studio and the AWS Lambda commands added to the .NET Core CLI.",
-    "To learn more about the Lambda commands with the .NET Core CLI execute the following command at the command line in the project root directory.",
-    "dotnet lambda help",
-    "All the command line options for the Lambda command can be specified in this file."
-  ],
-  "profile": "default",
-  "region": "ap-southeast-1",
-  "configuration": "Release",
-  "framework": "netcoreapp3.1",
-  "function-runtime": "dotnetcore3.1",
-  "function-memory-size": 256,
-  "function-timeout": 30,
-  "function-handler": "AEMS.Monitors::AEMS.Monitors.Function::FunctionHandler"
+    "Information" : [
+        "This file provides default values for the deployment wizard inside Visual Studio and the AWS Lambda commands added to the .NET Core CLI.",
+        "To learn more about the Lambda commands with the .NET Core CLI execute the following command at the command line in the project root directory.",
+        "dotnet lambda help",
+        "All the command line options for the Lambda command can be specified in this file."
+    ],
+    "profile"     : "Bryan",
+    "region"      : "ap-southeast-1",
+    "configuration" : "Release",
+    "framework"     : "netcoreapp3.1",
+    "function-runtime" : "dotnetcore3.1",
+    "function-memory-size" : 512,
+    "function-timeout"     : 15,
+    "function-handler"     : "AEMS.Monitors::AEMS.Monitors.Function::FunctionHandler",
+    "function-name"        : "AEMS-EquipmentLogging",
+    "function-description" : "",
+    "package-type"         : "Zip",
+    "function-role"        : "arn:aws:iam::322460248841:role/service-role/AEMS-EquipmentLogging-role-ymntsoh0",
+    "function-architecture" : "x86_64",
+    "tracing-mode"          : "PassThrough",
+    "environment-variables" : "\"AWSSecretKey\"=\"7FLnMLTXu8SXCfsugpY5MceUNfLcN5/Wgbq8otQj\";\"SQLConnectionString\"=\"Data Source=aems.csyfrkxhnsrx.ap-southeast-1.rds.amazonaws.com;Initial Catalog=AEMS-DB;User ID=admin;Password=12345678;MultipleActiveResultSets=true\";\"CosmosContainer\"=\"equipment-log\";\"TimeZoneInfo\"=\"SE Asia Standard Time\";\"CosmosDatabase\"=\"aems-db\";\"AWSAccessKey\"=\"AKIAUWFBA5MEQMLZYIIH\";\"CosmosDBConnection\"=\"AccountEndpoint=https://cosmos-aems.documents.azure.com:443/;AccountKey=Rp1xc3lGAVphdwBtDoLhStCA9iH18ZJv1Uylit5vIAd6LsdtNp8oiZaGQpsTILJZQahSrhVYDI8vvNnuy1n8MQ==;\"",
+    "image-tag"             : ""
 }

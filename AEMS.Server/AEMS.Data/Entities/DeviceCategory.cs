@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AEMS.Data.Entities
 {
-    [Table("EquipmentCategory")]
-    public class EquipmentCategory : BaseEntity
+    [Table("DeviceCategory")]
+    public class DeviceCategory : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

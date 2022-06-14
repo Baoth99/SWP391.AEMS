@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace AEMS.Monitors
+namespace AEMS.Simulator.Core
 {
-    public class AEMSDeviceMessageRequestModel
+    public class DeviceMessageRequestModel
     {
-        public string DeviceId { get; set; } // Device ID
-
-        public DateTime CreatedAt { get; set; }
+        public string DeviceId { get; set; } 
 
         public DateTime EventTime { get; set; }
+
+        public DateTime CreatedAt { get; set; }
 
         public int EventType { get; set; }
 
@@ -18,7 +18,7 @@ namespace AEMS.Monitors
 
         public string Message { get; set; }
 
-        public float BatteryLevel { get; set; }
+        public long BatteryLevel { get; set; }
 
         public float Power { get; set; } //W
 

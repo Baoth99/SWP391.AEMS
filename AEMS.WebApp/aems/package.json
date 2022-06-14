@@ -5,7 +5,10 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+<<<<<<< HEAD
     "@hookform/resolvers": "^2.9.1",
+=======
+>>>>>>> dc89784e4e15922c837e0beaeac02034fce51c24
     "@mui/icons-material": "^5.8.2",
     "@mui/material": "^5.8.2",
     "@mui/x-data-grid": "^5.12.0",
@@ -19,13 +22,20 @@
     "lottie-web": "^5.9.4",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+<<<<<<< HEAD
     "react-hook-form": "^7.32.0",
+=======
+>>>>>>> dc89784e4e15922c837e0beaeac02034fce51c24
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.3",
+<<<<<<< HEAD
     "web-vitals": "^2.1.0",
     "yup": "^0.32.11"
+=======
+    "web-vitals": "^2.1.0"
+>>>>>>> dc89784e4e15922c837e0beaeac02034fce51c24
   },
   "scripts": {
     "start": "react-scripts start",

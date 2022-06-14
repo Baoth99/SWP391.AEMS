@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AEMS.Data.Entities
 {
-    [Table("EquipmentLog")]
-    public class Equipment : BaseEntity
+    [Table("Device")]
+    public class Device : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -29,8 +29,8 @@ namespace AEMS.Data.Entities
 
         public int Status { get; set; }
 
-        [ForeignKey("EquipmentCategory")]
-        public Guid EquipmentCategoryId { get; set; }
+        [ForeignKey("DeviceCategory")]
+        public Guid DeviceCategoryId { get; set; }
 
         [ForeignKey("Area")]
         public Guid AreaId { get; set; }

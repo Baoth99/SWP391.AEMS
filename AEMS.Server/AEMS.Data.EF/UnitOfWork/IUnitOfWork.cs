@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using AEMS.Data.EF.Repositories;
+using AEMS.Data.Entities;
+using System.Threading.Tasks;
 using System.Transactions;
 
 namespace AEMS.Data.EF.UnitOfWork
@@ -6,6 +8,14 @@ namespace AEMS.Data.EF.UnitOfWork
     public interface IUnitOfWork
     {
         #region Repositories
+
+        IRepository<Device> DeviceRepository { get; }
+
+        IRepository<DeviceCategory> DeviceCategoryRepository { get; }
+
+        IRepository<Area> AreaRepository { get; }
+
+        IRepository<Photo> PhotoRepository { get; }
 
         #endregion
 

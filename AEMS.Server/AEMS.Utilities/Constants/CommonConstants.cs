@@ -10,4 +10,14 @@ namespace AEMS.Utilities
 
         public static TimeSpan TimeSpanNow => DateTimeNow.TimeOfDay;
     }
+
+    public class EquipmentStatus
+    {
+        public const int InActive = 0;
+        public const int Active = 1;
+        public const int Maintained = 2;
+        public const int Broken = 3;
+    }
+
+
 }

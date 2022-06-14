@@ -31,9 +31,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-DataAccess", "03-DataAcc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AEMS.DataAccess", "AEMS.DataAccess\AEMS.DataAccess.csproj", "{DB9BE277-A76B-4F51-B3B2-A84F9051C69D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AEMS.MSAzureService", "AEMS.MSAzureService\AEMS.MSAzureService.csproj", "{1DFB5E21-4ECD-4DE9-8487-A61316EC28FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AEMS.MSAzureService", "AEMS.MSAzureService\AEMS.MSAzureService.csproj", "{1DFB5E21-4ECD-4DE9-8487-A61316EC28FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AEMS.AWSService", "AEMS.AWSService\AEMS.AWSService.csproj", "{E0D092A8-C187-4DD0-95C0-A4C50D0B2141}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AEMS.AWSService", "AEMS.AWSService\AEMS.AWSService.csproj", "{E0D092A8-C187-4DD0-95C0-A4C50D0B2141}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
