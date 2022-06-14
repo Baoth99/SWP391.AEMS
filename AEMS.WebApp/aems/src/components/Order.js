@@ -8,15 +8,15 @@ import MaxWidthDialog from './editAsset';
 const columns = [
   { field: 'id', headerName: 'ID', flex: 1},
   { field: 'name', headerName: 'Name', flex: 1},
-  { field: 'brand', headerName: 'Brand', flex: 1},
+  { field: 'email', headerName: 'Email', flex: 1},
   {
-    field: 'desc',
-    headerName: 'Desc',
+    field: 'phone',
+    headerName: 'Phone',
     flex: 1
   },
   {
-    field: 'price',
-    headerName: 'Price',
+    field: 'website',
+    headerName: 'Website',
     flex: 1,
   },
 ];
@@ -30,22 +30,24 @@ const DataTable = ()  => {
   useEffect(() => {
      dispatch(assetFetch)
   })
-  return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={assetItems.items}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-        onSelectionModelChange={(ids) => {
-          const selectedIDs = new Set(ids);
-          const selectedRows = assetItems.items.filter((row) =>
+
+  const selectedModelChange = ids => {
+    const selectedIDs = new Set(ids);
+          const selectedRows = assetItems?.items?.filter((row) =>
             selectedIDs.has(row.id),
           );
          selectedRows.length === 0 ? setIsOpen(isOpen) : setIsOpen(!isOpen)
           setSelectedRows(selectedRows);
-        }}
+  }
+  return (
+    <div style={{ height: 400, width: '100%' }}>
+      <DataGrid
+        rows={assetItems?.items}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+        checkboxSelection
+        onSelectionModelChange={(ids) => {selectedModelChange(ids)}}
       />
       <MaxWidthDialog isDialogOpened={isOpen} items={selectedRows} handleCloseDialog={() => setIsOpen(false)} />
     </div>

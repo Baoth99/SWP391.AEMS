@@ -1,4 +1,4 @@
-export const uri = 'http://localhost:5000/api'
+export const uri = 'https://jsonplaceholder.typicode.com/users'
 
 export const setHeaders = () => {
    const headers = {
