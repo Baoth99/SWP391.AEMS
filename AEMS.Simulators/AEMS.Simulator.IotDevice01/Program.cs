@@ -49,6 +49,7 @@ namespace AEMS.Simulator.IotDevice01
                 Energy = (float)63.44,
                 Power = (float)85.68,
                 Voltage = (float)121.67,
+                Temperature = (float)40.0,
 
                 Geolocation = new Location()
                 {

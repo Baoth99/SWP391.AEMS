@@ -41,10 +41,11 @@ namespace AEMS.Simulator.IotDevice03
                 Message = $"{DeviceCode} is runing very well",
                 Status = DeviceStatus.Standby,
                 StatusMessage = DeviceStatusMesage.Standby,
-                BatteryLevel = 49,
-                Energy = (float)72.89,
-                Power = (float)89.32,
-                Voltage = (float)143.53,
+                BatteryLevel = 48,
+                Energy = (float)71.89,
+                Power = (float)90.91,
+                Voltage = (float)122.32,
+                Temperature = (float)51.0,
 
                 Geolocation = new Location()
                 {
@@ -54,9 +55,9 @@ namespace AEMS.Simulator.IotDevice03
                 },
                 Magnetometer = new Coordinate()
                 {
-                    x = (decimal)43.12,
-                    y = (decimal) -178.2,
-                    z = (decimal)-40.89
+                    x = (decimal)41.12,
+                    y = (decimal) -142.2,
+                    z = (decimal)-44.21
                 },
                 MeterType = "3S",
                 Version = 1.0F,

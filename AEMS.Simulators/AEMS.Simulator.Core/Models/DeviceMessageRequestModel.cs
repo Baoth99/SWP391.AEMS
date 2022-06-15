@@ -26,6 +26,7 @@ namespace AEMS.Simulator.Core
 
         public float Voltage { get; set; } // V
 
+        public float Temperature { get; set; } // C
         public Location Geolocation { get; set; }
 
         public string MeterType { get; set; }

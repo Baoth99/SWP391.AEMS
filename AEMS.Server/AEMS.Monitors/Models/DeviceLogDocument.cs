@@ -30,6 +30,8 @@ namespace AEMS.Monitors
 
         public float Energy { get; set; } //kWh
 
+        public float Temperature { get; set; } // C
+
         public float Voltage { get; set; } // V
 
         public string MeterType { get; set; }

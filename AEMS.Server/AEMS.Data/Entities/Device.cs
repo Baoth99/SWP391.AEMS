@@ -27,6 +27,10 @@ namespace AEMS.Data.Entities
 
         public string Description { get; set; }
 
+        public Guid? PowerBiDashboardId { get; set; }
+
+        public string PowerBiDashboarđEndpoint { get; set; }
+
         public int Status { get; set; }
 
         [ForeignKey("DeviceCategory")]
