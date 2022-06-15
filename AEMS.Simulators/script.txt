@@ -1,8 +1,0 @@
-Script Format to covert .pem.crt file to .cert.pfx file:
-openssl pkcs12 -export -in {file_name}.pem.crt -inkey {name}-private.pem.key -out Certificate.cert.pfx -certfile {file_name}.pem
-
-
-Password to read .cert.pfx: 123
-
-Example:
-openssl pkcs12 -export -in AmazonRootCA-certificate.pem.crt -inkey AmazonRootCA-private.pem.key -out Certificate.cert.pfx -certfile AmazonRootCA1.pem
