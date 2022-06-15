@@ -16,6 +16,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { MSSignInButton } from "./MSButton";
+
+import { useMsal } from "@azure/msal-react";
+import { loginRequest } from "../../services/authConfig";
 
 const theme = createTheme();
 
@@ -23,6 +27,28 @@ const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const auth = useSelector((state) => state.auth)
+
+  const { instance, accounts } = useMsal(); //MS
+
+  function GetUserInfo() {
+    // Silently acquires an access token which is then attached to a request for MS Graph data
+    instance.acquireTokenSilent({
+        ...loginRequest,
+        account: accounts[0] 
+    }).then((response) => {
+        var name = response.account.name;
+        var username = response.account.username
+        var oid = response.account.idTokenClaims.oid;
+        var accessToken = response.accessToken
+
+        // TODO:
+        console.log(name);
+        console.log(username);
+        console.log(oid);
+        console.log(accessToken);
+    });
+}
+
 
   const [user, setUser] = useState({
     email: "",
@@ -102,6 +128,7 @@ const Login = () => {
             >
               {auth.loginStatus === "pending" ? "Submitting ..." : "Login"}
             </Button>
+            <MSSignInButton/>
             {auth.loginStatus === "rejected" ? <p>{auth.loginError}</p> : null}
             <Grid container>
               <Grid item xs>

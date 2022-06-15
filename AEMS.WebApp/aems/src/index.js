@@ -8,7 +8,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/authSlice";
 import assetReducer, { assetFetch } from "./slices/assetSlice";
 import {assetApi} from "./slices/assetApi"
-
+import { PublicClientApplication } from "@azure/msal-browser";
+import { MsalProvider } from "@azure/msal-react";
+import { msalConfig } from "./services/authConfig";
 const store = configureStore({
   reducer: {
     asset: assetReducer,
@@ -21,11 +23,16 @@ const store = configureStore({
 store.dispatch(assetFetch())
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const msalInstance = new PublicClientApplication(msalConfig);
+
 root.render(
+
   <React.StrictMode>
-   <Provider store={store}>
-     <App />
-   </Provider>
+    <MsalProvider instance={msalInstance}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </MsalProvider>
   </React.StrictMode>
 );
 
