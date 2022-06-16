@@ -19,7 +19,7 @@ namespace AEMS.MSAzureService
         private readonly IConfidentialClientApplication _confidentialClientApplication;
 
         private readonly string[] GraphScopes = new string[] { "https://graph.microsoft.com/.default"};
-        private readonly string[] PowerBiScopes = new string[] { "https://analysis.windows.net/powerbi/api/.default" };
+       
 
         public AadService(IConfidentialClientApplication confidentialClientApplication)
         {
@@ -36,12 +36,6 @@ namespace AEMS.MSAzureService
             return new GraphServiceClient(deletgate);
         }
 
-        private async Task<TokenCredentials> GetTokenCredentials()
-        {
-            var authResult = await _confidentialClientApplication.AcquireTokenForClient(PowerBiScopes).ExecuteAsync().ConfigureAwait(false);
-            return new TokenCredentials(authResult.AccessToken, "Bearer");
-        }
-
         public async Task<List<MSUserProfile>> GetUsers()
         {
             var graphServiceClient = GetGraphServiceClient();
@@ -56,39 +50,6 @@ namespace AEMS.MSAzureService
             }).ToList();
 
             return userRes;
-        }
-
-        public async Task<PowerBITokenModel> GetPowerBIToken(Guid reportId)
-        {
-            var tokenCredencials = await GetTokenCredentials();
-
-            using (var client = new PowerBIClient(new Uri(AppSettingValues.PowerBIApiUrl), tokenCredencials))
-            {
-                var report = new PowerBIReport();
-                try
-                {
-                    var res = await client.Reports.GetReportInGroupWithHttpMessagesAsync(AppSettingValues.PowerBIGroupId, reportId);
-                    report = JsonConvert.DeserializeObject<PowerBIReport>(await res.Response.Content.ReadAsStringAsync());
-                }
-                catch (Exception ex)
-                {
-                    return PowerBITokenModel.Error(ex.Message);
-                }
-
-
-                var response = await client.Reports
-                              .GenerateTokenInGroupWithHttpMessagesAsync(
-                                    AppSettingValues.PowerBIGroupId,
-                                    reportId,
-                                    new GenerateTokenRequest(accessLevel: "view"));
-
-                return new PowerBITokenModel()
-                {
-                    EmmbedToken = response.Body.Token,
-                    EmmbedUrl = report.EmbedUrl,
-                    ReportId = reportId
-                };
-            }
         }
     }
 }

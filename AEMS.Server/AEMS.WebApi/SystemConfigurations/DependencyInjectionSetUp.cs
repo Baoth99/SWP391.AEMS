@@ -1,5 +1,4 @@
-﻿using AEMS.Application;
-using AEMS.AWSService;
+﻿using AEMS.AWSService;
 using AEMS.Data.EF.UnitOfWork;
 using AEMS.MSAzureService;
 using AEMS.ORM.Dapper;
@@ -24,9 +23,7 @@ namespace AEMS.WebApi.SystemConfigurations
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IDapperService, DapperService>();
             services.AddScoped<IAuthSession, AuthSession>();
-
-            services.AddScoped<IDeviceService, DeviceService>();
-
+            
             #region MS Azure
 
             var confidential = ConfidentialClientApplicationBuilder.Create(AppSettingValues.AadClientId)
@@ -37,13 +34,14 @@ namespace AEMS.WebApi.SystemConfigurations
             services.AddSingleton<IConfidentialClientApplication>(confidential);
 
             services.AddScoped<IAadService, AadService>();
+            services.AddScoped<IPowerBIService, PowerBIService>();
 
             #endregion
 
             #region Amazon Web Service
 
-            services.AddSingleton<IAmazonS3>(new AmazonS3Client(AppSettingValues.AWSAccessKey, AppSettingValues.AWSSecretKey, RegionEndpoint.APSoutheast1));
             services.AddScoped<IAWSS3Service, AWSS3Service>();
+            services.AddScoped<IAWSIotCoreService, AWSIotCoreService>();
 
             #endregion
 

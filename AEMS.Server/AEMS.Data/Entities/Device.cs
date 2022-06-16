@@ -29,7 +29,7 @@ namespace AEMS.Data.Entities
 
         public Guid? PowerBiDashboardId { get; set; }
 
-        public string PowerBiDashboarđEndpoint { get; set; }
+        public string PowerBiDashboardEndpoint { get; set; }
 
         public int Status { get; set; }
 

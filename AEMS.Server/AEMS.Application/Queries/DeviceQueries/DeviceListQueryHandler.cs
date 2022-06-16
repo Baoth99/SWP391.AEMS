@@ -1,28 +1,28 @@
-﻿using AEMS.Data.EF.UnitOfWork;
-using AEMS.DataAccess.DTOs;
-using AEMS.DataAccess.Models;
-using AEMS.ORM.Dapper;
+﻿using AEMS.ORM.Dapper;
+using AEMS.Data.EF.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AEMS.Utilities;
+using Microsoft.ApplicationInsights;
 
-namespace AEMS.DataAccess.Queries
+namespace AEMS.Application.Queries
 {
-    public class DeviceQueryHandler : BaseDataAccess, IQueryHandler<GetDeviceListQuery, IEnumerable<DeviceViewModel>>
+    public class DeviceListQueryHandler : BaseDataAccess, IQueryHandler<GetDeviceListQuery, IEnumerable<DeviceViewModel>>
     {
-        public DeviceQueryHandler(IUnitOfWork unitOfWork, IDapperService dapperService) : base(unitOfWork, dapperService)
+        public DeviceListQueryHandler(IUnitOfWork unitOfWork,IDapperService dapperService, 
+                                  IAuthSession authSession, TelemetryClient telemetryClient) : base(unitOfWork, dapperService, authSession, telemetryClient)
         {
-
         }
 
         public async Task<IEnumerable<DeviceViewModel>> Handle(GetDeviceListQuery request, CancellationToken cancellationToken)
         {
-            
+
             var dataQuery = UnitOfWork.DeviceRepository.GetManyAsNoTracking(x => string.IsNullOrEmpty(request.Code) || x.Code.Contains(request.Code) &&
                                                                                string.IsNullOrEmpty(request.Name) || x.Name.Contains(request.Name))
-                                                     .Join(UnitOfWork.DeviceCategoryRepository.GetManyAsNoTracking(x => request.DeviceCategoryId == null || x.Id == request.DeviceCategoryId), 
+                                                     .Join(UnitOfWork.DeviceCategoryRepository.GetManyAsNoTracking(x => request.DeviceCategoryId == null || x.Id == request.DeviceCategoryId),
                                                                                                                                         x => x.DeviceCategoryId, y => y.Id, (x, y) => new
                                                                                                                                         {
                                                                                                                                             Device = x

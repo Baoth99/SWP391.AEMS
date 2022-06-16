@@ -11,13 +11,19 @@ namespace AEMS.Utilities
         public static TimeSpan TimeSpanNow => DateTimeNow.TimeOfDay;
     }
 
-    public class EquipmentStatus
+
+    public class DeviceStatusConst
     {
-        public const int InActive = 0;
-        public const int Active = 1;
-        public const int Maintained = 2;
-        public const int Broken = 3;
+        public const int Connected = 0;
+        public const int Standby = 1;
+        public const int Disconnected = 2;
     }
 
-
+    public class DeviceStatusMesage
+    {
+        public const string Connected = "Connected";
+        public const string Standby = "Standby";
+        public const string Disconnected = "Disconnected";
+    }
+    
 }

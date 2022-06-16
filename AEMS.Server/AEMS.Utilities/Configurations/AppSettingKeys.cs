@@ -53,6 +53,11 @@
             public const string Region = "AWS:Region";
             public const string S3BucketName = "AWS:S3BucketName";
             public const string DurationPreSignedUrl = "AWS:DurationPreSignedUrl";
+            public const string ApiGatewayAccessKey = "AWS:ApiGatewayAccessKey";
+            public const string ApiGatewaySecretKey = "AWS:ApiGatewaySecretKey";
+            public const string ApiGatewayS3InvokeURL = "AWS:ApiGatewayS3InvokeURL";
+            public const string MqttBrokerEndpoint = "AWS:MqttBrokerEndpoint";
+            public const string TelemetrySettingDeviceTopic = "AWS:TelemetrySettingDeviceTopic";
         }
 
         public static class SystemConfig

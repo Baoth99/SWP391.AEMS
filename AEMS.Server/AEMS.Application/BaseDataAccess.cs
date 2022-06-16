@@ -1,7 +1,9 @@
 ﻿using AEMS.Data.EF.UnitOfWork;
 using AEMS.ORM.Dapper;
+using AEMS.Utilities;
+using Microsoft.ApplicationInsights;
 
-namespace AEMS.DataAccess
+namespace AEMS.Application
 {
     public class BaseDataAccess
     {
@@ -22,14 +24,30 @@ namespace AEMS.DataAccess
         protected IDapperService DapperService { get; private set; }
 
         /// <summary>
+        /// Gets the authentication session.
+        /// </summary>
+        /// <value>
+        /// The authentication session.
+        /// </value>
+        protected IAuthSession AuthSession { get; private set; }
+
+        /// <summary>
+        /// The telemetry client
+        /// </summary>
+        protected readonly TelemetryClient TelemetryClient;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="BaseDataAccess"/> class.
         /// </summary>
         /// <param name="unitOfWork">The unit of work.</param>
         /// <param name="dapperService">The dapper service.</param>
-        public BaseDataAccess(IUnitOfWork unitOfWork, IDapperService dapperService)
+        /// <param name="authSession">The authentication session.</param>
+        public BaseDataAccess(IUnitOfWork unitOfWork, IDapperService dapperService, IAuthSession authSession, TelemetryClient telemetryClient)
         {
             UnitOfWork = unitOfWork;
             DapperService = dapperService;
+            AuthSession = authSession;
+            TelemetryClient = telemetryClient;
         }
     }
 }

@@ -1,15 +1,16 @@
-﻿
-using System;
+﻿using System;
 
 namespace AEMS.MSAzureService
 {
     public class PowerBITokenModel
     {
+        public Guid Id { get; set; }
+
         public string EmmbedToken { get; set; }
 
         public string EmmbedUrl { get; set; }
 
-        public Guid ReportId { get; set; }
+        public string Type { get; set; }
 
         public string ErrorMessage { get; set; }
 

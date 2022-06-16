@@ -8,7 +8,7 @@ namespace AEMS.Utilities
 {
     public class ApplicationRestfulApi
     {
-        public const string BaseApiUrl = "/api/v{ver:apiVersion}/";
+        public const string BaseApiUrl = "/api/v{ver:apiVersion}/[controller]";
 
         public const string ApplicationProduce = "application/json";
 

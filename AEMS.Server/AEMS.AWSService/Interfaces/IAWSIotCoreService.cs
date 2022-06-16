@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AEMS.MSAzureService
+namespace AEMS.AWSService
 {
-    public interface IAadService
+    public interface IAWSIotCoreService
     {
-        Task<List<MSUserProfile>> GetUsers();
+        Task PublishMQTTMessage<T>(string topic, T model);
     }
 }
