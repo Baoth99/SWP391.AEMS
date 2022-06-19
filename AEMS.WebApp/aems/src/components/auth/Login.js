@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../slices/authSlice";
+import { loginUser, loginAzure } from "../../slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -51,8 +51,16 @@ const Login = () => {
 
   const handleLogin = (instance) => {
     instance.loginPopup(loginRequest)
-    .then
-    (res => console.log('res', res))
+    .then(res => {
+      console.log(res);
+      var responseModel = {
+        accessToken: res.accessToken,
+        name: res.account.name,
+        email : res.account.username,
+        _id : res.account.idTokenClaims.oid
+      };
+      dispatch(loginAzure(responseModel))
+    })
     .catch(e => {
         console.error(e);
     })

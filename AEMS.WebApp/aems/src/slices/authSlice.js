@@ -17,8 +17,8 @@ const initialState = {
 
 export const msalConfig = {
   auth: {
-    clientId: "cb584841-262a-4219-b141-0983c26e4f15",
-    authority: "https://login.microsoftonline.com/447080b4-b9c6-4b0b-92fd-b543a68b4e97", // This is a URL (e.g. https://login.microsoftonline.com/{your tenant ID})
+    clientId: "00a21f64-cd60-4444-8e0f-03c9f4d36762",
+    authority: "https://login.microsoftonline.com/0571822d-33dc-455e-a07f-1b5575297583", // This is a URL (e.g. https://login.microsoftonline.com/{your tenant ID})
     redirectUri: "http://localhost:3000",
   },
   cache: {
@@ -73,6 +73,21 @@ export const loginUser = createAsyncThunk(
         }
     }
 )
+
+export const loginAzure = createAsyncThunk(
+  "auth/loginAzure",
+  async (values, { rejectWithValue }) => {
+      try {
+          localStorage.setItem("token", values.accessToken);
+          return values.accessToken;
+      }
+      catch (error) {
+          console.log(error.response.data)
+          return rejectWithValue(error.response.data)
+      }
+  }
+)
+
 
 export const getUser = createAsyncThunk(
     "auth/getUser",
@@ -153,6 +168,7 @@ const authSlice = createSlice({
           builder.addCase(loginUser.fulfilled, (state, action) => {
             if (action.payload) {
               const user = jwtDecode(action.payload);
+              console.log(user);
               return {
                 ...state,
                 token: action.payload,
@@ -170,6 +186,31 @@ const authSlice = createSlice({
               loginError: action.payload,
             };
           });
+
+          builder.addCase(loginAzure.pending, (state, action) => {
+            return { ...state, loginStatus: "pending" };
+          });
+          builder.addCase(loginAzure.fulfilled, (state, action) => {
+            if (action.payload) {
+              const user = jwtDecode(action.payload);
+              return {
+                ...state,
+                token: action.payload,
+                name: user.name,
+                email: user.email,
+                _id: user.oid,
+                loginStatus: "success",
+              };
+            } else return state;
+          });
+          builder.addCase(loginAzure.rejected, (state, action) => {
+            return {
+              ...state,
+              loginStatus: "rejected",
+              loginError: action.payload,
+            };
+          });
+
           builder.addCase(getUser.pending, (state, action) => {
             return {
               ...state,
