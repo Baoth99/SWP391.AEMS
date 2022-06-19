@@ -36,12 +36,12 @@ const Login = () => {
   const isAuthenticated = useIsAuthenticated();
 
   useEffect(() => {
-    if (auth.id) {
+    if (auth._id) {
       navigate("/home")
     } else {
       navigate("/login")
     }
-  }, [auth?._id, navigate]);
+  }, [auth._id, navigate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -51,11 +51,11 @@ const Login = () => {
 
   const handleLogin = (instance) => {
     instance.loginPopup(loginRequest)
-    .then
-    (res => console.log('res', res))
-    .catch(e => {
+      .then
+      (res => console.log('res', res))
+      .catch(e => {
         console.error(e);
-    })
+      })
   }
 
   return (
