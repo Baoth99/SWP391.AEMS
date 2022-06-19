@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import NotFound from './components/error/NotFound';
+import { useIsAuthenticated } from "@azure/msal-react";
 
 function RequireAuth() {
   const auth = useSelector((state) => state.auth)

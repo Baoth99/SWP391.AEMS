@@ -19,6 +19,23 @@
     "jsonpointer" "^5.0.0"
     "leven" "^3.1.0"
 
+"@azure/msal-browser@^2.26.0":
+  "integrity" "sha512-mSyZORSgeMEWz5Wo5alUqjxP/HKt/XcViZqc3dnKFM9347qYPIWsAlzHkEmmafNr1VGUo7MeqB0emZCOQrl04w=="
+  "resolved" "https://registry.npmjs.org/@azure/msal-browser/-/msal-browser-2.26.0.tgz"
+  "version" "2.26.0"
+  dependencies:
+    "@azure/msal-common" "^7.0.0"
+
+"@azure/msal-common@^7.0.0":
+  "integrity" "sha512-EkaHGjv0kw1RljhboeffM91b+v9d5VtmyG+0a/gvdqjbLu3kDzEfoaS5BNM9QqMzbxgZylsjAjQDtxdHLX/ziA=="
+  "resolved" "https://registry.npmjs.org/@azure/msal-common/-/msal-common-7.0.0.tgz"
+  "version" "7.0.0"
+
+"@azure/msal-react@^1.4.2":
+  "integrity" "sha512-5d663wBJRhnAM16QSR2wHEKFonI3STNpOuq1Tmelg2fAyOXZUxyCxyFlWOE/FZuhbXS3C4VmLHaEYHMnofRcyQ=="
+  "resolved" "https://registry.npmjs.org/@azure/msal-react/-/msal-react-1.4.2.tgz"
+  "version" "1.4.2"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.16.0", "@babel/code-frame@^7.16.7", "@babel/code-frame@^7.8.3":
   "integrity" "sha512-iAXqUn8IIeBTNd72xsFlgaXHkMBMt6y4HJp1tIaK465CWLT/fG1aqB7ykr95gHHmlBdGbFeWWfyB4NJJ0nmeIg=="
   "resolved" "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.16.7.tgz"

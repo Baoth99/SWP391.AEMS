@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
-import { uri, setHeaders } from "./api";
-import { create } from "@mui/material/styles/createTransitions";
+import { uri, loginUrl } from "./api";
 
 const initialState = {
     token: localStorage.getItem("token"),
@@ -15,6 +14,28 @@ const initialState = {
     loginError: "",
     userLoaded: false,
 }
+
+export const msalConfig = {
+  auth: {
+    clientId: "cb584841-262a-4219-b141-0983c26e4f15",
+    authority: "https://login.microsoftonline.com/447080b4-b9c6-4b0b-92fd-b543a68b4e97", // This is a URL (e.g. https://login.microsoftonline.com/{your tenant ID})
+    redirectUri: "http://localhost:3000",
+  },
+  cache: {
+    cacheLocation: "sessionStorage", // This configures where your cache will be stored
+    storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
+  }
+};
+
+// Add scopes here for ID token to be used at Microsoft identity platform endpoints.
+export const loginRequest = {
+ scopes: ["User.Read"]
+};
+
+// Add the endpoints here for Microsoft Graph API services you'd like to use.
+export const graphConfig = {
+    graphMeEndpoint: "https://graph.microsoft.com"
+};
 
 export const registerUser = createAsyncThunk(
     "auth/registerUser",
@@ -39,7 +60,7 @@ export const loginUser = createAsyncThunk(
     "auth/loginUser",
     async (values, { rejectWithValue }) => {
         try {
-            const token = await axios.post(`${uri}/login`, {
+            const token = await axios.post(`${loginUrl}/login`, {
                 email: values.email,
                 password: values.password
             })

@@ -32,24 +32,25 @@ const DataTable = ()  => {
   })
 
   const selectedModelChange = ids => {
-    const selectedIDs = new Set(ids);
-          const selectedRows = assetItems?.items?.filter((row) =>
+          const selectedIDs = new Set(ids);
+          const selectedRows = assetItems.items.filter((row) =>
             selectedIDs.has(row.id),
           );
-         selectedRows.length === 0 ? setIsOpen(isOpen) : setIsOpen(!isOpen)
-          setSelectedRows(selectedRows);
+         selectedRows.length === 1 ? setIsOpen(!isOpen) : setIsOpen(isOpen) 
+         setSelectedRows(selectedRows);
+        console.log(selectedRows)
   }
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
-        rows={assetItems?.items}
+        rows={assetItems.items}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
         checkboxSelection
         onSelectionModelChange={(ids) => {selectedModelChange(ids)}}
       />
-      <MaxWidthDialog isDialogOpened={isOpen} items={selectedRows} handleCloseDialog={() => setIsOpen(false)} />
+      <MaxWidthDialog isDialogOpened={isOpen} items={selectedRows[selectedRows.length - 1]} handleCloseDialog={() => setIsOpen(false)} />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useState, useEffect} from "react"
+import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../slices/authSlice";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,11 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import PixIcon from '@mui/icons-material/Pix';
+import { useMsal } from "@azure/msal-react";
+import { loginRequest } from "../../slices/authSlice";
+import { useIsAuthenticated } from "@azure/msal-react";
+import Home from '../../components/Home'
 
 const theme = createTheme();
 
@@ -23,30 +28,35 @@ const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const auth = useSelector((state) => state.auth)
-
+  const { instance } = useMsal();
   const [user, setUser] = useState({
     email: "",
     password: "",
   })
+  const isAuthenticated = useIsAuthenticated();
 
   useEffect(() => {
-    if(auth._id) {
+    if (auth.id) {
       navigate("/home")
     } else {
       navigate("/login")
     }
-  }, [auth._id, navigate])
+  }, [auth?._id, navigate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(user.name);
     dispatch(loginUser(user))
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
   };
+
+  const handleLogin = (instance) => {
+    instance.loginPopup(loginRequest)
+    .then
+    (res => console.log('res', res))
+    .catch(e => {
+        console.error(e);
+    })
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -75,7 +85,7 @@ const Login = () => {
               label="Email Address"
               name="email"
               type="email"
-              onChange={(e) => setUser({...user, email: e.target.value})}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
               autoComplete="email"
               autoFocus
             />
@@ -87,12 +97,8 @@ const Login = () => {
               label="Password"
               type="password"
               id="password"
-              onChange={(e) => setUser({...user, password: e.target.value})}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             <Button
               type="submit"
@@ -101,6 +107,9 @@ const Login = () => {
               sx={{ mt: 3, mb: 2 }}
             >
               {auth.loginStatus === "pending" ? "Submitting ..." : "Login"}
+            </Button>
+            <Button variant="contained" fullWidth color="warning" startIcon={<PixIcon />} onClick={() => handleLogin(instance)}>
+              Login Azure
             </Button>
             {auth.loginStatus === "rejected" ? <p>{auth.loginError}</p> : null}
             <Grid container>

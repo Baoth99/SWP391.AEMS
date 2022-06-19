@@ -24,13 +24,14 @@ const MaxWidthDialog = ({ isDialogOpened, handleCloseDialog, items }) => {
   const dispatch = useDispatch();
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth] = React.useState("sm");
+  const [asset, setAssets] = useState([])
   const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({
     mode: 'onChange',
     resolver: yupResolver(schema)
   });
 
   useEffect(() => {
-    // dispatch(assetUpdate(items[0]?.id))
+    setAssets(items)
   })
 
 
@@ -69,16 +70,17 @@ const MaxWidthDialog = ({ isDialogOpened, handleCloseDialog, items }) => {
               inputProps={
                 register('id')
               }
-              defaultValue={items[0]?.id}
+              defaultValue={items?.id}
             />
             <TextField
               margin="dense"
               id="name"
               label="Name"
+              name="name"
               fullWidth
               variant="outlined"
               inputProps={register('name')}
-              defaultValue={items[0]?.name}
+              defaultValue={items?.name || ''}
             />
             <p style={{ color: 'red' }}>{errors.name?.message}</p>
             <TextField
@@ -88,7 +90,7 @@ const MaxWidthDialog = ({ isDialogOpened, handleCloseDialog, items }) => {
               fullWidth
               variant="outlined"
               inputProps={register('email')}
-              defaultValue={items[0]?.email}
+              defaultValue={items?.email || ''}
             />
             <p style={{ color: 'red' }}>{errors.brandname?.message}</p>
             <TextField
@@ -98,7 +100,7 @@ const MaxWidthDialog = ({ isDialogOpened, handleCloseDialog, items }) => {
               fullWidth
               variant="outlined"
               inputProps={register('phone')}
-              defaultValue={items[0]?.phone}
+              defaultValue={items?.phone || ''}
             />
             <p style={{ color: 'red' }}>{errors.desc?.message}</p>
             <TextField
@@ -108,7 +110,7 @@ const MaxWidthDialog = ({ isDialogOpened, handleCloseDialog, items }) => {
               fullWidth
               variant="outlined"
               inputProps={register('website')}
-              defaultValue={items[0]?.website}
+              defaultValue={items?.website || ''}
             />
             <p style={{ color: 'red' }}>{errors.price?.message}</p>
           </DialogContent>
