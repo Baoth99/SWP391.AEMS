@@ -17,6 +17,8 @@
         {
             public const string ApiUrl = "PowerBI:ApiUrl";
             public const string GroupId = "PowerBI:GroupId";
+            public const string CustomerInfoReport = "PowerBI:CustomerInfoReport";
+            public const string DeviceReport = "PowerBI:DeviceReport";
         }
 
         public static class AzureKeyVault

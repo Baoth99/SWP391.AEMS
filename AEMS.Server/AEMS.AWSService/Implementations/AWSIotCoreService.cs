@@ -1,6 +1,7 @@
 ﻿using AEMS.Utilities;
 using Amazon;
 using Amazon.IoT;
+using Amazon.IoT.Model;
 using Amazon.IotData;
 using Amazon.IotData.Model;
 using Newtonsoft.Json;
@@ -35,6 +36,15 @@ namespace AEMS.AWSService
                                 
             };
             await AmazonIotDataClient.PublishAsync(request);
+        }
+
+        public async Task AddNewThing(CreateThingModel model)
+        {
+            var thingRequest = new CreateThingRequest()
+            {
+                ThingName = model.ThingName,
+            };
+            // TODO:
         }
     }
 }

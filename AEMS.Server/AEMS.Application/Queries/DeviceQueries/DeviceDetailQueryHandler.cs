@@ -74,7 +74,7 @@ namespace AEMS.Application.Queries.DeviceQueries
 
             if (dataQuery.PowerBiDashboardId != null)
             {
-                var tokenInfo = await _powerBIService.GetDashboardToken(dataQuery.PowerBiDashboardId.Value);
+                var tokenInfo = await _powerBIService.GetDashboardToken(dataQuery.PowerBiDashboardId);
 
                 if (string.IsNullOrEmpty(tokenInfo.ErrorMessage))
                 {

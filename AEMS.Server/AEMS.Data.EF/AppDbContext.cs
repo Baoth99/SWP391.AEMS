@@ -51,6 +51,7 @@ namespace AEMS.Data.EF
         public virtual DbSet<Device> Device { get; set; }
         public virtual DbSet<DeviceCategory> DeviceCategory { get; set; }
         public virtual DbSet<Photo> Photo { get; set; }
+        public virtual DbSet<CustomerInfo> CustomerInfo { get; set; }
 
         #endregion
 
@@ -103,7 +104,19 @@ namespace AEMS.Data.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DeviceCategory>().HasKey(k => new { k.Code, k.Id});
-            modelBuilder.Entity<Device>().HasKey(k => new { k.Code, k.Id});
+
+            modelBuilder.Entity<Device>(entity =>
+            {
+                entity.HasKey(k => new { k.Code, k.Id });
+                entity.Property(e => e.Latitude).HasColumnType("decimal(9,6)");
+                entity.Property(e => e.Longitude).HasColumnType("decimal(9,6)");
+            });
+
+            modelBuilder.Entity<CustomerInfo>(entity =>
+            {
+                entity.Property(e => e.Latitude).HasColumnType("decimal(9,6)");
+                entity.Property(e => e.Longitude).HasColumnType("decimal(9,6)");
+            });
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {

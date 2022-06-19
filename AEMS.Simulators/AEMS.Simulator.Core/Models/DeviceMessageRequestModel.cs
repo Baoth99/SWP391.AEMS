@@ -35,6 +35,41 @@ namespace AEMS.Simulator.Core
 
         public float Version { get; set; }
 
+
+        public static DeviceMessageRequestModel CreateRequestModel(string DeviceCode)
+        {
+            return new DeviceMessageRequestModel()
+            {
+                DeviceId = DeviceCode,
+                CreatedAt = DateTimeCountry.DateTimeNow(),
+                EventTime = DateTimeCountry.DateTimeNow(),
+                EventType = 1,
+                Message = $"{DeviceCode} is runing very well",
+                Status = DeviceStatus.Standby,
+                StatusMessage = DeviceStatusMesage.Standby,
+                BatteryLevel = 80,
+                Energy = (float)81.63,
+                Power = (float)68.32,
+                Voltage = (float)128.51,
+                Temperature = (float)40.0,
+
+                Geolocation = new Location()
+                {
+                    Latitude = (decimal)10.777786761721552,
+                    Longitude = (decimal)106.62406201837359,
+                    Altitude = (decimal)6.5
+                },
+                Magnetometer = new Coordinate()
+                {
+                    x = (decimal)40.21,
+                    y = (decimal)-112.67,
+                    z = (decimal)-40.24
+                },
+                MeterType = "3S",
+                Version = 1.0F,
+            };
+        }
+
     }
 
     public class Coordinate

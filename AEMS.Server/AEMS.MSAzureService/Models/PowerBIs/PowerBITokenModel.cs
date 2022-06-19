@@ -4,7 +4,7 @@ namespace AEMS.MSAzureService
 {
     public class PowerBITokenModel
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         public string EmmbedToken { get; set; }
 

@@ -30,19 +30,19 @@ namespace AEMS.MSAzureService
         }
 
 
-        public async Task<PowerBITokenModel> GetDashboardToken(Guid dashboardId)
+        public async Task<PowerBITokenModel> GetDashboardToken(string dashboardId)
         {
             var tokenCredencials = await GetTokenCredentials();
             using (var client = new PowerBIClient(new Uri(AppSettingValues.PowerBIApiUrl), tokenCredencials))
             {
                 try
                 {
-                    var dashboardGuid = Guid.Parse(AppSettingValues.PowerBIGroupId);
-                    var dashboard = await client.Dashboards.GetDashboardInGroupAsync(dashboardGuid, dashboardId);
+                    var groupId = Guid.Parse(AppSettingValues.PowerBIGroupId);
+                    var dashboard = await client.Dashboards.GetDashboardInGroupAsync(groupId, Guid.Parse(dashboardId));
 
                     var tokenRequestParameters = new GenerateTokenRequest(accessLevel: "view");
 
-                    var response = await client.Dashboards.GenerateTokenInGroupAsync(dashboardGuid, dashboardId, tokenRequestParameters);
+                    var response = await client.Dashboards.GenerateTokenInGroupAsync(groupId, Guid.Parse(dashboardId), tokenRequestParameters);
 
                     return new PowerBITokenModel()
                     {
@@ -59,19 +59,19 @@ namespace AEMS.MSAzureService
             }
         }
 
-        public async Task<PowerBITokenModel> GetReportToken(Guid reportId)
+        public async Task<PowerBITokenModel> GetReportToken(string reportId)
         {
             var tokenCredencials = await GetTokenCredentials();
             using (var client = new PowerBIClient(new Uri(AppSettingValues.PowerBIApiUrl), tokenCredencials))
             {
                 try
                 {
-                    var reportGuid = Guid.Parse(AppSettingValues.PowerBIGroupId);
-                    var report = await client.Reports.GetReportInGroupAsync(reportGuid, reportId);
+                    var groupId = Guid.Parse(AppSettingValues.PowerBIGroupId);
+                    var report = await client.Reports.GetReportInGroupAsync(groupId, Guid.Parse(reportId));
 
                     var tokenRequestParameters = new GenerateTokenRequest(accessLevel: "view");
 
-                    var response = await client.Reports.GenerateTokenInGroupAsync(reportGuid, reportId, tokenRequestParameters);
+                    var response = await client.Reports.GenerateTokenInGroupAsync(groupId, Guid.Parse(reportId), tokenRequestParameters);
 
                     return new PowerBITokenModel()
                     {

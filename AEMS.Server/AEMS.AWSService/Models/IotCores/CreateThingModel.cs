@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace AEMS.AWSService
 {
-    public interface IAWSIotCoreService
+    public class CreateThingModel
     {
-        Task PublishMQTTMessage<T>(string topic, T model);
+        public string ThingName { get; set; }
 
-
-        Task AddNewThing(CreateThingModel model);
     }
 }

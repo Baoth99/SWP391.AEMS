@@ -44,7 +44,7 @@ namespace AEMS.Application
 
     public class PBITokenModel
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         public string EmmbedToken { get; set; }
 

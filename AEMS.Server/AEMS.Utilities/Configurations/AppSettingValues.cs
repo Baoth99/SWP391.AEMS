@@ -58,6 +58,10 @@ namespace AEMS.Utilities
 
         public static string PowerBIGroupId => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.PowerBI.GroupId);
 
+        public static string PowerBICustomerInfoReport => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.PowerBI.CustomerInfoReport);
+
+        public static string PowerBIDeviceReport => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.PowerBI.DeviceReport);
+
         //Get from Azure Key Vault
         public static string AadDomain => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.AzureAd.Domain);
 

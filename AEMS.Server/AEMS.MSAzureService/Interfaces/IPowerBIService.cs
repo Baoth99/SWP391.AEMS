@@ -5,8 +5,8 @@ namespace AEMS.MSAzureService
 {
     public interface IPowerBIService
     {
-        Task<PowerBITokenModel> GetReportToken(Guid reportId);
+        Task<PowerBITokenModel> GetReportToken(string reportId);
 
-        Task<PowerBITokenModel> GetDashboardToken(Guid dashboardId);
+        Task<PowerBITokenModel> GetDashboardToken(string dashboardId);
     }
 }
