@@ -5,7 +5,6 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-<<<<<<< HEAD
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -25,32 +24,16 @@ const MaxWidthDialog = ({ isDialogOpened, handleCloseDialog, items }) => {
   const dispatch = useDispatch();
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth] = React.useState("sm");
+  const [asset, setAssets] = useState([])
   const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({
     mode: 'onChange',
     resolver: yupResolver(schema)
   });
 
   useEffect(() => {
-    // dispatch(assetUpdate(items[0]?.id))
+    setAssets(items)
   })
 
-=======
-
-export default function MaxWidthDialog({ isDialogOpened, handleCloseDialog, items }) {
-  useEffect(() => {
-    handleClickOpen();
-  }, []);
-
-  //const classes = useStyles();
-  //const [open, setOpen] = React.useState(false);
-  const [fullWidth, setFullWidth] = React.useState(true);
-  const [maxWidth] = React.useState("sm");
-
-  const handleClickOpen = () => {
-    //setOpen(true);
-    //setTimeout(() => setOpen(false), 16000);
-  };
->>>>>>> dc89784e4e15922c837e0beaeac02034fce51c24
 
   const handleClose = () => {
     handleCloseDialog(false);
@@ -87,16 +70,17 @@ export default function MaxWidthDialog({ isDialogOpened, handleCloseDialog, item
               inputProps={
                 register('id')
               }
-              defaultValue={items[0]?.id}
+              defaultValue={items?.id}
             />
             <TextField
               margin="dense"
               id="name"
               label="Name"
+              name="name"
               fullWidth
               variant="outlined"
               inputProps={register('name')}
-              defaultValue={items[0]?.name}
+              defaultValue={items?.name || ''}
             />
             <p style={{ color: 'red' }}>{errors.name?.message}</p>
             <TextField
@@ -106,7 +90,7 @@ export default function MaxWidthDialog({ isDialogOpened, handleCloseDialog, item
               fullWidth
               variant="outlined"
               inputProps={register('email')}
-              defaultValue={items[0]?.email}
+              defaultValue={items?.email || ''}
             />
             <p style={{ color: 'red' }}>{errors.brandname?.message}</p>
             <TextField
@@ -116,7 +100,7 @@ export default function MaxWidthDialog({ isDialogOpened, handleCloseDialog, item
               fullWidth
               variant="outlined"
               inputProps={register('phone')}
-              defaultValue={items[0]?.phone}
+              defaultValue={items?.phone || ''}
             />
             <p style={{ color: 'red' }}>{errors.desc?.message}</p>
             <TextField
@@ -126,7 +110,7 @@ export default function MaxWidthDialog({ isDialogOpened, handleCloseDialog, item
               fullWidth
               variant="outlined"
               inputProps={register('website')}
-              defaultValue={items[0]?.website}
+              defaultValue={items?.website || ''}
             />
             <p style={{ color: 'red' }}>{errors.price?.message}</p>
           </DialogContent>
