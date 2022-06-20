@@ -29,13 +29,13 @@ export const msalConfig = {
 
 // Add scopes here for ID token to be used at Microsoft identity platform endpoints.
 export const loginRequest = {
- scopes: ["User.Read"]
+ scopes: ["api://00a21f64-cd60-4444-8e0f-03c9f4d36762/UserAccess"]
 };
 
 // Add the endpoints here for Microsoft Graph API services you'd like to use.
-export const graphConfig = {
-    graphMeEndpoint: "https://graph.microsoft.com"
-};
+// export const graphConfig = {
+//     graphMeEndpoint: "https://graph.microsoft.com/.default"
+// };
 
 export const registerUser = createAsyncThunk(
     "auth/registerUser",
