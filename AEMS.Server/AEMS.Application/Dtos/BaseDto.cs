@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace AEMS.DataAccess.DTOs
+namespace AEMS.Application
 {
     public interface IQuery<out TResult> : IRequest<TResult>
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace AEMS.Simulator.Core.Utilities
+namespace AEMS.Simulator.Core
 {
     public class ConsoleAppConfig
     {

@@ -41,7 +41,7 @@ const Login = () => {
     } else {
       navigate("/login")
     }
-  }, [auth._id, navigate]);
+  }, [auth?._id, navigate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -63,7 +63,11 @@ const Login = () => {
     })
     .catch(e => {
         console.error(e);
+<<<<<<< HEAD
       })
+=======
+    })
+>>>>>>> origin/develop
   }
 
   return (

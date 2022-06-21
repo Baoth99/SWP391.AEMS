@@ -54,6 +54,34 @@ namespace AEMS.Data.EF.Migrations
                     b.ToTable("Area");
                 });
 
+            modelBuilder.Entity("AEMS.Data.Entities.CustomerInfo", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("AreaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Latitude")
+                        .HasColumnType("decimal(9,6)");
+
+                    b.Property<decimal>("Longitude")
+                        .HasColumnType("decimal(9,6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CustomerInfo");
+                });
+
             modelBuilder.Entity("AEMS.Data.Entities.Device", b =>
                 {
                     b.Property<string>("Code")
@@ -90,6 +118,12 @@ namespace AEMS.Data.EF.Migrations
                     b.Property<DateTime?>("LastModifiedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<decimal>("Latitude")
+                        .HasColumnType("decimal(9,6)");
+
+                    b.Property<decimal>("Longitude")
+                        .HasColumnType("decimal(9,6)");
+
                     b.Property<string>("ManagementVersion")
                         .HasColumnType("nvarchar(max)");
 
@@ -97,6 +131,12 @@ namespace AEMS.Data.EF.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PowerBiDashboardEndpoint")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PowerBiDashboardId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")

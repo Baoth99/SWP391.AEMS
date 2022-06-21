@@ -58,5 +58,13 @@ namespace AEMS.Utilities
         /// The system exception.
         /// </value>
         public static string SystemException => "300007";
+
+        /// <summary>
+        /// Gets the service exception.
+        /// </summary>
+        /// <value>
+        /// The service exception.
+        /// </value>
+        public static string ServiceException => "300008";
     }
 }

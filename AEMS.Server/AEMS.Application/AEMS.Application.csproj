@@ -1,11 +1,25 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AEMS.DataAccess\AEMS.DataAccess.csproj" />
+    <Compile Remove="Dtos\CommandDtos\**" />
+    <EmbeddedResource Remove="Dtos\CommandDtos\**" />
+    <None Remove="Dtos\CommandDtos\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AEMS.AWSService\AEMS.AWSService.csproj" />
+    <ProjectReference Include="..\AEMS.Data.EF\AEMS.Data.EF.csproj" />
+    <ProjectReference Include="..\AEMS.Data\AEMS.Data.csproj" />
+    <ProjectReference Include="..\AEMS.MSAzureService\AEMS.MSAzureService.csproj" />
+    <ProjectReference Include="..\AEMS.ORM.Dapper\AEMS.ORM.Dapper.csproj" />
     <ProjectReference Include="..\AEMS.Utilities\AEMS.Utilities.csproj" />
   </ItemGroup>
 

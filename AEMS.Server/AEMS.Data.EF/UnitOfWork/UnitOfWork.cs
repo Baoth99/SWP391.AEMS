@@ -150,6 +150,7 @@ namespace AEMS.Data.EF.UnitOfWork
             Transaction.Dispose();
             Transaction = null;
             _isolationLevel = null;
+            _transactionScopeOption = null;
             AppDbContext.Database.CloseConnection();
         }
 
@@ -183,10 +184,10 @@ namespace AEMS.Data.EF.UnitOfWork
                     }
                     CommitTransaction();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     RollbackTransaction();
-                    throw ex;
+                    throw;
                 }
             });
         }

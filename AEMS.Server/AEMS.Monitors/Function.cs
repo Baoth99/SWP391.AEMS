@@ -75,10 +75,12 @@ namespace AEMS.Monitors
                         Status = requestModel.Status,
                         StatusMessage = requestModel.StatusMessage,
 
+                        
                         BatteryLevel = requestModel.BatteryLevel,
                         Power = requestModel.Power,
                         Energy = requestModel.Energy,
                         Voltage = requestModel.Voltage,
+                        Temperature = requestModel.Temperature,
                         MeterType = requestModel.MeterType,
                         Version = requestModel.Version,
 

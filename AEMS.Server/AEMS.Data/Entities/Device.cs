@@ -27,6 +27,14 @@ namespace AEMS.Data.Entities
 
         public string Description { get; set; }
 
+        public string PowerBiDashboardId { get; set; }
+
+        public string PowerBiDashboardEndpoint { get; set; }
+
+        public decimal Latitude { get; set; }
+
+        public decimal Longitude { get; set; }
+
         public int Status { get; set; }
 
         [ForeignKey("DeviceCategory")]

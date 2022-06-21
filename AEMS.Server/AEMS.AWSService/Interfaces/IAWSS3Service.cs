@@ -28,5 +28,8 @@ namespace AEMS.AWSService
         /// <param name="paths">The paths.</param>
         /// <returns></returns>
         IEnumerable<string> GetMutiPresignedUrl(List<string> paths);
+
+
+        IEnumerable<string> GetMutiApiGatewayS3InvokeURL(List<string> paths);
     }
 }

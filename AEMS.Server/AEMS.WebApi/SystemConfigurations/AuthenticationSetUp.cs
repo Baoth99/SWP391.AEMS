@@ -23,8 +23,8 @@ namespace AEMS.WebApi.SystemConfigurations
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddMicrosoftIdentityWebApi(options =>
                     {
-                        options.TokenValidationParameters.NameClaimType = "name";
                         options.TokenValidationParameters.ValidateAudience = false;
+                        options.RequireHttpsMetadata = false;
                         options.Events = new JwtBearerEvents()
                         {
                             OnAuthenticationFailed = (context) =>
@@ -55,7 +55,6 @@ namespace AEMS.WebApi.SystemConfigurations
                         options.Domain = AppSettingValues.AadDomain;
                         options.ClientId = AppSettingValues.AadClientId;
                         options.TenantId = AppSettingValues.AadTenantId;
-                        options.ClientSecret = AppSettingValues.AadClientSecret;
                     });
         }
     }

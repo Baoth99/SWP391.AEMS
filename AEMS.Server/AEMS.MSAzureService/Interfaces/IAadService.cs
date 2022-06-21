@@ -9,7 +9,5 @@ namespace AEMS.MSAzureService
     public interface IAadService
     {
         Task<List<MSUserProfile>> GetUsers();
-
-        Task<PowerBITokenModel> GetPowerBIToken(Guid reportId);
     }
 }

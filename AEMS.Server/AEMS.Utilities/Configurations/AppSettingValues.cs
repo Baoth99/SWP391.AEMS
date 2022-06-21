@@ -23,6 +23,17 @@ namespace AEMS.Utilities
 
         public static int AWSDurationPreSignedUrl => ConfigurationHelper.GetConfigValue<int>(AppSettingKeys.AWS.DurationPreSignedUrl);
 
+        public static string AWSApiGatewayAccessKey => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.AWS.ApiGatewayAccessKey);
+
+        public static string AWSApiGatewaySecretKey => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.AWS.ApiGatewaySecretKey);
+
+        public static string AWSApiGatewayS3InvokeURL => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.AWS.ApiGatewayS3InvokeURL);
+
+        public static string AWSMqttBrokerEndpoint => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.AWS.MqttBrokerEndpoint);
+
+        public static string AWSTelemetrySettingDeviceTopic => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.AWS.TelemetrySettingDeviceTopic);
+
+
         public static string SwaggerDocTitle => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.SwaggerDocApiInfo.Title);
 
         public static string SwaggerDocTermsOfService => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.SwaggerDocApiInfo.TermsOfService);
@@ -45,7 +56,11 @@ namespace AEMS.Utilities
 
         public static string PowerBIApiUrl => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.PowerBI.ApiUrl);
 
-        public static Guid PowerBIGroupId => ConfigurationHelper.GetConfigValue<Guid>(AppSettingKeys.PowerBI.GroupId);
+        public static string PowerBIGroupId => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.PowerBI.GroupId);
+
+        public static string PowerBICustomerInfoReport => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.PowerBI.CustomerInfoReport);
+
+        public static string PowerBIDeviceReport => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.PowerBI.DeviceReport);
 
         //Get from Azure Key Vault
         public static string AadDomain => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.AzureAd.Domain);

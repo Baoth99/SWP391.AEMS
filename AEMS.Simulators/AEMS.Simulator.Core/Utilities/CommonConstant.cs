@@ -14,4 +14,9 @@ namespace AEMS.Simulator.Core
         public const string Standby = "Standby";
         public const string Disconnected = "Disconnected";
     }
+
+    public class Acction
+    {
+
+    }
 }

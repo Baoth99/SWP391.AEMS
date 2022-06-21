@@ -1,4 +1,5 @@
 ﻿using AEMS.Utilities;
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Microsoft.AspNetCore.Http;
@@ -26,9 +27,9 @@ namespace AEMS.AWSService
         /// Initializes a new instance of the <see cref="AWSS3Service"/> class.
         /// </summary>
         /// <param name="amazonS3">The amazon s3.</param>
-        public AWSS3Service(IAmazonS3 amazonS3)
+        public AWSS3Service()
         {
-            AmazonS3 = amazonS3;
+            AmazonS3 = new AmazonS3Client(AppSettingValues.AWSAccessKey, AppSettingValues.AWSSecretKey, RegionEndpoint.APSoutheast1);
         }
 
         #endregion
@@ -106,5 +107,9 @@ namespace AEMS.AWSService
 
         #endregion
 
+        public IEnumerable<string> GetMutiApiGatewayS3InvokeURL(List<string> paths)
+        {
+            return paths.Select(x => $"{AppSettingValues.AWSApiGatewayS3InvokeURL}/{x}");
+        }
     }
 }

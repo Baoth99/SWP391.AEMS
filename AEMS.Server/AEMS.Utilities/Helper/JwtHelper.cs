@@ -24,7 +24,7 @@ namespace AEMS.Utilities.Helper
                 Id = Guid.Parse(dictionaryClaim["oid"]),
                 Name = dictionaryClaim["name"],
                 Email = dictionaryClaim["email"],
-                Country = dictionaryClaim["ctry"],
+                Country = dictionaryClaim["tenant_ctry"],
                 Token = token
             };
         }

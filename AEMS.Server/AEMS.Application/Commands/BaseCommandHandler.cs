@@ -1,7 +1,6 @@
-﻿using AEMS.DataAccess.DTOs;
-using MediatR;
+﻿using MediatR;
 
-namespace AEMS.DataAccess.Commands
+namespace AEMS.Application
 {
     public interface ICommandHandler<TCommand> : IRequestHandler<TCommand> where TCommand : ICommand
     {
