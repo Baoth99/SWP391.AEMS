@@ -63,11 +63,7 @@ const Login = () => {
     })
     .catch(e => {
         console.error(e);
-<<<<<<< HEAD
-      })
-=======
     })
->>>>>>> origin/develop
   }
 
   return (

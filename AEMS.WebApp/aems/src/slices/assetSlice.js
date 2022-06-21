@@ -16,9 +16,9 @@ export const assetFetch = createAsyncThunk(
     "asset/assetFetch",
     async () => {
         try {
-            const response = await axios.get(
-                `${uri}`
-            )
+            const response = await axios.get(`${uri}`, {
+                headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`}
+            })
             return response.data
         }
         catch (error) {
@@ -26,6 +26,22 @@ export const assetFetch = createAsyncThunk(
         }
     }
 )
+
+export const assetFetchDetail = createAsyncThunk(
+    "asset/assetFetchDetail",
+    async ({id}) => {
+        try {
+            const response = await axios.get(`${uri}/detail?Id=${id}`, {
+                headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`}
+            })
+            return response.data
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+)
+
 
 export const assetUpdate = createAsyncThunk(
     "asset/assetUpdate",
@@ -56,6 +72,18 @@ const assetSlice = createSlice({
         [assetFetch.rejected]: (state, action) => {
             state.status = "rejected";
         },
+
+        [assetFetchDetail.pending]: (state, action) => {
+            state.status = "pending";
+        },
+        [assetFetchDetail.fulfilled]: (state, action) => {
+            state.items = action.payload;
+            state.status = "success";
+        },
+        [assetFetchDetail.rejected]: (state, action) => {
+            state.status = "rejected";
+        },
+       
         [assetUpdate.pending]: (state, action) => {
             state.status = "pending";
         },

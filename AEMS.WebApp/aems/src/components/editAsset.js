@@ -9,7 +9,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { assetUpdate } from "../slices/assetSlice";
+import { assetUpdate, assetFetchDetail } from "../slices/assetSlice";
+
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -19,19 +20,22 @@ const schema = yup.object().shape({
 
 }).required();
 
-const MaxWidthDialog = ({ isDialogOpened, handleCloseDialog, items }) => {
+const MaxWidthDialog = ({ isDialogOpened, handleCloseDialog, id }) => {
 
   const dispatch = useDispatch();
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth] = React.useState("sm");
   const [asset, setAssets] = useState([])
-  const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm({
     mode: 'onChange',
     resolver: yupResolver(schema)
   });
+  const assetItems = useSelector((state) => ({...state.asset}));
+
 
   useEffect(() => {
-    setAssets(items)
+//    dispatch(assetFetchDetail({id: id}))
+    console.log('assetFetchDetail', assetItems)
   })
 
 
@@ -70,7 +74,6 @@ const MaxWidthDialog = ({ isDialogOpened, handleCloseDialog, items }) => {
               inputProps={
                 register('id')
               }
-              defaultValue={items?.id}
             />
             <TextField
               margin="dense"
@@ -80,7 +83,6 @@ const MaxWidthDialog = ({ isDialogOpened, handleCloseDialog, items }) => {
               fullWidth
               variant="outlined"
               inputProps={register('name')}
-              defaultValue={items?.name || ''}
             />
             <p style={{ color: 'red' }}>{errors.name?.message}</p>
             <TextField
@@ -90,7 +92,6 @@ const MaxWidthDialog = ({ isDialogOpened, handleCloseDialog, items }) => {
               fullWidth
               variant="outlined"
               inputProps={register('email')}
-              defaultValue={items?.email || ''}
             />
             <p style={{ color: 'red' }}>{errors.brandname?.message}</p>
             <TextField
@@ -100,7 +101,6 @@ const MaxWidthDialog = ({ isDialogOpened, handleCloseDialog, items }) => {
               fullWidth
               variant="outlined"
               inputProps={register('phone')}
-              defaultValue={items?.phone || ''}
             />
             <p style={{ color: 'red' }}>{errors.desc?.message}</p>
             <TextField
@@ -110,9 +110,9 @@ const MaxWidthDialog = ({ isDialogOpened, handleCloseDialog, items }) => {
               fullWidth
               variant="outlined"
               inputProps={register('website')}
-              defaultValue={items?.website || ''}
             />
             <p style={{ color: 'red' }}>{errors.price?.message}</p>
+            <p>{id}</p>
           </DialogContent>
           <DialogActions>
             <Button variant="outlined" onClick={handleClose}>Cancel</Button>
