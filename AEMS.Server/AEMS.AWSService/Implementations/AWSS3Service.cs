@@ -49,6 +49,7 @@ namespace AEMS.AWSService
                 {
                     BucketName = AppSettingValues.AWSS3BucketName,
                     Key = path,
+                    Verb = HttpVerb.GET,
                     Expires = DateTimeCountry.DateTimeNow.AddMinutes(AppSettingValues.AWSDurationPreSignedUrl)
                 };
 

@@ -22,11 +22,23 @@ namespace AEMS.Simulator.Core
 
                 switch (telemetryModel.Action)
                 {
-                    case "ACC OFF":
+                    case RemoteControlAction.AccOff:
                         AppConfiguration.IsPublished = false;
                         break;
-                    case "ACC ON":
+                    case RemoteControlAction.AccOn:
                         AppConfiguration.IsPublished = true;
+                        break;
+                    case RemoteControlAction.BatteryReportOn:
+                        // TODO:
+                        break;
+                    case RemoteControlAction.BatteryReportOff:
+                        // TODO:
+                        break;
+                    case RemoteControlAction.TemperatureReportOn:
+                        // TODO:
+                        break;
+                    case RemoteControlAction.TemperatureReportOff:
+                        // TODO:
                         break;
                     default:
                         break;

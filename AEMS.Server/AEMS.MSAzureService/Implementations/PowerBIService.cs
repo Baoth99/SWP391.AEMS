@@ -47,7 +47,7 @@ namespace AEMS.MSAzureService
                     return new PowerBITokenModel()
                     {
                         Id = dashboardId,
-                        Type = "Report",
+                        Type = "Dashboard",
                         EmmbedToken = response.Token,
                         EmmbedUrl = dashboard.EmbedUrl,
                     };
