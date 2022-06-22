@@ -23,7 +23,6 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"
 import Button from '@mui/material/Button';
 import CreateIcon from '@mui/icons-material/Create';
-import Deposits from './Deposits';
 
 const drawerWidth = 240;
 
@@ -73,7 +72,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
-const DashboardContent = () => {
+const Deposits = () => {
 
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
@@ -163,15 +162,7 @@ const DashboardContent = () => {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
 
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-              <Button variant="contained" endIcon={<CreateIcon />}>
-                    Create
-                  </Button>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', mt: 2}}>
-                  <DataTable />
-                </Paper>
-              </Grid>
+                <p>Deposit</p>
             </Grid>
 
           </Container>
@@ -181,6 +172,4 @@ const DashboardContent = () => {
   );
 }
 
-export default function Home() {
-  return <DashboardContent />;
-}
+export default Deposits

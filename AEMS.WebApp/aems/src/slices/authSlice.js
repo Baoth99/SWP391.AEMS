@@ -78,7 +78,7 @@ export const loginAzure = createAsyncThunk(
   "auth/loginAzure",
   async (values, { rejectWithValue }) => {
       try {
-          localStorage.setItem("token", values.accessToken);
+        localStorage.setItem("token", values.accessToken);
           return values.accessToken;
       }
       catch (error) {
