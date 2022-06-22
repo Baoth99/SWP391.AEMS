@@ -20,15 +20,11 @@ namespace AEMS.Application.Queries
         public async Task<IEnumerable<DeviceViewModel>> Handle(GetDeviceListQuery request, CancellationToken cancellationToken)
         {
 
-            var dataQuery = UnitOfWork.DeviceRepository.GetManyAsNoTracking(x => string.IsNullOrEmpty(request.Code) || x.Code.Contains(request.Code) &&
-                                                                               string.IsNullOrEmpty(request.Name) || x.Name.Contains(request.Name))
-                                                     .Join(UnitOfWork.DeviceCategoryRepository.GetManyAsNoTracking(x => request.DeviceCategoryId == null || x.Id == request.DeviceCategoryId),
-                                                                                                                                        x => x.DeviceCategoryId, y => y.Id, (x, y) => new
+            var dataQuery = UnitOfWork.DeviceRepository.GetAllAsNoTracking().Join(UnitOfWork.DeviceCategoryRepository.GetAllAsNoTracking(),x => x.DeviceCategoryId, y => y.Id, (x, y) => new
                                                                                                                                         {
                                                                                                                                             Device = x
                                                                                                                                         })
-                                                     .Join(UnitOfWork.AreaRepository.GetManyAsNoTracking(x => request.AreaId == null || x.Id == request.AreaId),
-                                                                                                                                        x => x.Device.AreaId, y => y.Id, (x, y) => new
+                                                                            .Join(UnitOfWork.AreaRepository.GetAllAsNoTracking(),x => x.Device.AreaId, y => y.Id, (x, y) => new
                                                                                                                                         {
                                                                                                                                             EquipmentId = x.Device.Id,
                                                                                                                                             Code = x.Device.Code,
@@ -41,9 +37,9 @@ namespace AEMS.Application.Queries
                                                                                                                                             Status = x.Device.Status,
                                                                                                                                             x.Device.CreatedAt
                                                                                                                                         })
-                                                     .OrderByDescending(x => x.CreatedAt);
+                                                                            .OrderByDescending(x => x.CreatedAt);
 
-            var result = await dataQuery.Skip((request.Page - 1) * request.PageSize).Take(request.PageSize).Select(x => new DeviceViewModel()
+            var result = await dataQuery.Select(x => new DeviceViewModel()
             {
                 Id = x.EquipmentId,
                 Code = x.Code,

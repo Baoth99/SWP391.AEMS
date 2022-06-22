@@ -1,7 +1,9 @@
 using System;
+using System.Net;
 using System.Threading.Tasks;
 using Amazon.Lambda.Core;
 using Microsoft.Azure.Cosmos;
+using Newtonsoft.Json;
 
 // AEMS.Monitors::AEMS.Monitors.Function::FunctionHandler
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
@@ -25,6 +27,11 @@ namespace AEMS.Monitors
         /// The cosmos container
         /// </summary>
         public static string CosmosContainer = Environment.GetEnvironmentVariable("CosmosContainer");
+
+        /// <summary>
+        /// The cosmos device information container
+        /// </summary>
+        public static string CosmosDeviceInfoContainer = Environment.GetEnvironmentVariable("CosmosDeviceInfoContainer");
 
         /// <summary>
         /// The aws access key
@@ -96,6 +103,47 @@ namespace AEMS.Monitors
                     if (newItem.StatusCode == System.Net.HttpStatusCode.Created)
                     {
                         LambdaLogger.Log($"Message is created at {requestModel.CreatedAt} from {requestModel.DeviceId} was got at {DateTimeNow} successfully !");
+
+                        var deviceContainer = client.GetContainer(CosmosDatabase, CosmosDeviceInfoContainer);
+                        var deviceInfo = await container.ReadItemAsync<DeviceInfoDocument>(requestModel.DeviceId, new PartitionKey(document.DeviceId));
+
+                        if (deviceInfo.StatusCode == HttpStatusCode.OK)
+                        {
+                            var powerBiDashboardEndpoint = deviceInfo.Resource.PowerBiDashboardEndpoint;
+
+                            if (!string.IsNullOrEmpty(powerBiDashboardEndpoint))
+                            {
+                                var pbiModel = new DeviceLogPowerBiDashboardModel()
+                                {
+                                    deviceId = requestModel.DeviceId,
+                                    eventTime = requestModel.EventTime,
+                                    eventType = requestModel.EventType,
+                                    message = requestModel.Message,
+                                    receivedAt = document.ReceivedAt,
+                                    Status = requestModel.Status,
+                                    statusMessage = requestModel.StatusMessage,
+
+                                    batteryLevel = requestModel.BatteryLevel,
+                                    power = requestModel.Power,
+                                    energy = requestModel.Energy,
+                                    voltage = requestModel.Voltage,
+                                    temperature = requestModel.Temperature,
+                                    meterType = requestModel.MeterType,
+                                    version = requestModel.Version,
+
+                                    latitude = requestModel.Geolocation.Latitude,
+                                    longitude = requestModel.Geolocation.Longitude,
+                                    altitude = requestModel.Geolocation.Altitude,
+                                    magnetometer_x = requestModel.Magnetometer.x,
+                                    magnetometer_y = requestModel.Magnetometer.y,
+                                    magnetometer_z = requestModel.Magnetometer.z,
+                                };
+
+                                var jsonMessage = JsonConvert.SerializeObject(pbiModel);
+
+                                await HttpClientUtil.ClientPost(powerBiDashboardEndpoint, jsonMessage);
+                            }
+                        }
                     }
                     else
                     {

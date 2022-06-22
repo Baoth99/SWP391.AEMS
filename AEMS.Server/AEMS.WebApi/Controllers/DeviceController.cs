@@ -27,9 +27,9 @@ namespace AEMS.WebApi.Controllers
         [ProducesResponseType(typeof(ErrorResponseModel), HttpStatusCodes.Forbidden)]
         [ProducesResponseType(typeof(ErrorResponseModel), HttpStatusCodes.Unauthorized)]
         [ServiceFilter(typeof(ApiAuthenticateFilterAttribute))]
-        public async Task<BaseApiResponseModel> Get([FromQuery] GetDeviceListQuery model)
+        public async Task<BaseApiResponseModel> Get()
         {
-            var result = await Mediator.Send(model);
+            var result = await Mediator.Send(new GetDeviceListQuery());
             return BaseApiResponse.OK(result, result.Count());
         }
 
@@ -45,5 +45,15 @@ namespace AEMS.WebApi.Controllers
             return BaseApiResponse.OK(result);
         }
 
+
+        [HttpPut]
+        [ProducesResponseType(typeof(BaseApiResponseModel), HttpStatusCodes.Ok)]
+        [ProducesResponseType(typeof(ErrorResponseModel), HttpStatusCodes.Forbidden)]
+        [ProducesResponseType(typeof(ErrorResponseModel), HttpStatusCodes.Unauthorized)]
+        [ServiceFilter(typeof(ApiAuthenticateFilterAttribute))]
+        public async Task<BaseApiResponseModel> Update([FromBody] UpdateDeviceCommand model)
+        {
+            return await Mediator.Send(model);
+        }
     }
 }

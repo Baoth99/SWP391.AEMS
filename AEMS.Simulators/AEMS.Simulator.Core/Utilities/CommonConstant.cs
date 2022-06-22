@@ -15,8 +15,14 @@ namespace AEMS.Simulator.Core
         public const string Disconnected = "Disconnected";
     }
 
-    public class Acction
+    public class RemoteControlAction
     {
+        public const string AccOn = "ACC_ON";
+        public const string AccOff = "ACC_OFF";
 
+        public const string BatteryReportOn = "BATTERY_REPORT_ON";
+        public const string BatteryReportOff = "BATTERY_REPORT_OFF";
+        public const string TemperatureReportOn = "TEMPERATURE_REPORT_ON";
+        public const string TemperatureReportOff = "TEMPERATURE_REPORT_OFF";
     }
 }

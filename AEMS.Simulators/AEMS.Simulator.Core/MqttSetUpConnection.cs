@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
@@ -29,7 +26,8 @@ namespace AEMS.Simulator.Core
                 {
                     var requestModel = DeviceMessageRequestModel.CreateRequestModel(AppConfiguration.DeviceCode);
 
-                    Console.WriteLine("Hello, I'm MQTT");
+                    //AppConfiguration.MqttClient.MqttPublishMessage<DeviceMessageRequestModel>(requestModel, AppConfiguration.Topic);
+
                     await Task.Delay(1000);
                 }
             }

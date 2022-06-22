@@ -15,5 +15,7 @@ namespace AEMS.Data.Entities
 
         public string Url { get; set; }
 
+        public bool IsUsed { get; set; }
+
     }
 }
