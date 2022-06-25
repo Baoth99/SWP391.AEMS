@@ -45,6 +45,12 @@ namespace AEMS.WebApi.SystemConfigurations
 
             #endregion
 
+            #region Azure
+
+            services.AddScoped<ICosmosDBService, CosmosDBService>();
+
+            #endregion
+
         }
     }
 }

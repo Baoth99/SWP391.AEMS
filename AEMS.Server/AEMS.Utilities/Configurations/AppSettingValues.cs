@@ -62,6 +62,14 @@ namespace AEMS.Utilities
 
         public static string PowerBIDeviceReport => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.PowerBI.DeviceReport);
 
+        public static string CosmosDbConnectionString => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.CosmosDbConnection.ConnectionString);
+
+        public static string CosmosDbDeviceLogContainer => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.CosmosDbConnection.DeviceLogContainer);
+
+        public static string CosmosDbDeviceInfoContainer => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.CosmosDbConnection.DeviceInfoContainer);
+
+        public static string CosmosDbAemsDb => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.CosmosDbConnection.AemsDb);
+
         //Get from Azure Key Vault
         public static string AadDomain => ConfigurationHelper.GetConfigValue<string>(AppSettingKeys.AzureAd.Domain);
 

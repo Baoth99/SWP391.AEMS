@@ -13,6 +13,16 @@
             public const string InstrumentationKey = "ApplicationInsights:InstrumentationKey";
         } 
 
+
+        public static class CosmosDbConnection
+        {
+            public const string ConnectionString = "CosmosDbConnection:ConnectionString";
+            public const string AemsDb = "CosmosDbConnection:AemsDb";
+            public const string DeviceLogContainer = "CosmosDbConnection:DeviceLogContainer";
+            public const string DeviceInfoContainer = "CosmosDbConnection:DeviceInfoContainer";
+        }
+
+
         public static class PowerBI
         {
             public const string ApiUrl = "PowerBI:ApiUrl";
