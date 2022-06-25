@@ -20,6 +20,6 @@
     "function-role"        : "arn:aws:iam::322460248841:role/service-role/AEMS-EquipmentLogging-role-ymntsoh0",
     "function-architecture" : "x86_64",
     "tracing-mode"          : "PassThrough",
-    "environment-variables" : "\"AWSSecretKey\"=\"7FLnMLTXu8SXCfsugpY5MceUNfLcN5/Wgbq8otQj\";\"SQLConnectionString\"=\"Data Source=aems.csyfrkxhnsrx.ap-southeast-1.rds.amazonaws.com;Initial Catalog=AEMS-DB;User ID=admin;Password=12345678;MultipleActiveResultSets=true\";\"CosmosContainer\"=\"equipment-log\";\"TimeZoneInfo\"=\"SE Asia Standard Time\";\"CosmosDatabase\"=\"aems-db\";\"AWSAccessKey\"=\"AKIAUWFBA5MEQMLZYIIH\";\"CosmosDBConnection\"=\"AccountEndpoint=https://cosmos-aems.documents.azure.com:443/;AccountKey=Rp1xc3lGAVphdwBtDoLhStCA9iH18ZJv1Uylit5vIAd6LsdtNp8oiZaGQpsTILJZQahSrhVYDI8vvNnuy1n8MQ==;\"",
+    "environment-variables" : "\"AWSSecretKey\"=\"7FLnMLTXu8SXCfsugpY5MceUNfLcN5/Wgbq8otQj\";\"CosmosDeviceInfoContainer\"=\"equipment-info\";\"SQLConnectionString\"=\"Data Source=aems.csyfrkxhnsrx.ap-southeast-1.rds.amazonaws.com;Initial Catalog=AEMS-DB;User ID=admin;Password=12345678;MultipleActiveResultSets=true\";\"CosmosContainer\"=\"equipment-log\";\"TimeZoneInfo\"=\"SE Asia Standard Time\";\"CosmosDatabase\"=\"aems-db\";\"AWSAccessKey\"=\"AKIAUWFBA5MEQMLZYIIH\";\"CosmosDBConnection\"=\"AccountEndpoint=https://cosmos-aems.documents.azure.com:443/;AccountKey=Rp1xc3lGAVphdwBtDoLhStCA9iH18ZJv1Uylit5vIAd6LsdtNp8oiZaGQpsTILJZQahSrhVYDI8vvNnuy1n8MQ==;\"",
     "image-tag"             : ""
 }

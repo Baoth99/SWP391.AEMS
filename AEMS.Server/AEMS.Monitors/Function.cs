@@ -105,7 +105,7 @@ namespace AEMS.Monitors
                         LambdaLogger.Log($"Message is created at {requestModel.CreatedAt} from {requestModel.DeviceId} was got at {DateTimeNow} successfully !");
 
                         var deviceContainer = client.GetContainer(CosmosDatabase, CosmosDeviceInfoContainer);
-                        var deviceInfo = await container.ReadItemAsync<DeviceInfoDocument>(requestModel.DeviceId, new PartitionKey(document.DeviceId));
+                        var deviceInfo = await deviceContainer.ReadItemAsync<DeviceInfoDocument>(requestModel.DeviceId, new PartitionKey(document.DeviceId));
 
                         if (deviceInfo.StatusCode == HttpStatusCode.OK)
                         {

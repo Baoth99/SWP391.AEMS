@@ -11,7 +11,7 @@ namespace AEMS.Simulator.Core
         public static Random Random = new Random();
 
 
-        public static float RandomNum(int max, int min)
+        public static long RandomNum(int max, int min)
         {
             return Random.Next(max, min);
         }

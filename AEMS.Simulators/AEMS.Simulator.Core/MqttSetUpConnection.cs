@@ -26,9 +26,9 @@ namespace AEMS.Simulator.Core
                 {
                     var requestModel = DeviceMessageRequestModel.CreateRequestModel(AppConfiguration.DeviceCode);
 
-                    //AppConfiguration.MqttClient.MqttPublishMessage<DeviceMessageRequestModel>(requestModel, AppConfiguration.Topic);
+                    AppConfiguration.MqttClient.MqttPublishMessage<DeviceMessageRequestModel>(requestModel, AppConfiguration.Topic);
 
-                    await Task.Delay(1000);
+                    await Task.Delay(3000);
                 }
             }
         }
