@@ -10,7 +10,7 @@ namespace AEMS.WebApi.Controllers
     [ApiExplorerSettings(GroupName = "v1")]
     [ApiController]
     [Authorize]
-    public class BaseController
+    public class BaseController : ControllerBase
     {
         protected IMediator Mediator { get; private set; }
 

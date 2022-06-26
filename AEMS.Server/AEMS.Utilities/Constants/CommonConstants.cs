@@ -42,4 +42,8 @@ namespace AEMS.Utilities
         public const string TemperatureReportOn = "TEMPERATURE_REPORT_ON";
         public const string TemperatureReportOff = "TEMPERATURE_REPORT_OFF";
     }
+    public static class ContentTypeString
+    {
+        public const string ExcelFileContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;";
+    }
 }

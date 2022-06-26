@@ -20,5 +20,9 @@ namespace AEMS.MSAzureService
 
         Task<IEnumerable<T>> GetManyAsync<T>(string queryString) where T : BaseCosmosDbModel;
 
+        IEnumerable<T> GetMany<T>(Func<T, bool> fun, bool isSynchronousQuery = true) where T : BaseCosmosDbModel;
+
+        IEnumerable<T> GetAll<T>(bool isSynchronousQuery = true) where T : BaseCosmosDbModel;
+
     }
 }

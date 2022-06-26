@@ -64,5 +64,15 @@ namespace AEMS.MSAzureService
             }
             return results;
         }
+
+        public IEnumerable<T> GetMany<T>(Func<T, bool> func ,bool isSynchronousQuery = true) where T : BaseCosmosDbModel
+        {
+            return _container.GetItemLinqQueryable<T>(isSynchronousQuery).Where(func);
+        }
+
+        public IEnumerable<T> GetAll<T>(bool isSynchronousQuery = true) where T : BaseCosmosDbModel
+        {
+            return _container.GetItemLinqQueryable<T>(isSynchronousQuery).AsEnumerable();
+        }
     }
 }
