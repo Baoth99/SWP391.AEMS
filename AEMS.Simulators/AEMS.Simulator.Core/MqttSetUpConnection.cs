@@ -19,7 +19,7 @@ namespace AEMS.Simulator.Core
 
         public static async Task ExecuteAsync()
         {
-            DeviceInfoUtil.GetBatteryLevel();
+            //DeviceInfoUtil.GetBatteryLevel();
             while (true)
             {
                 if (AppConfiguration.IsPublished)

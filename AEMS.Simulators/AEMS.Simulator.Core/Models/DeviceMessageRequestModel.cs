@@ -49,9 +49,9 @@ namespace AEMS.Simulator.Core
                 StatusMessage = DeviceStatusMesage.Standby,
                 BatteryLevel = GenerateRandom.RandomNum(10,90),
                 Energy = GenerateRandom.RandomNum(10, 90),
-                Power = (float)68.32,
-                Voltage = (float)128.51,
-                Temperature = (float)40.0,
+                Power = GenerateRandom.RandomNum(10, 90),
+                Voltage = GenerateRandom.RandomNum(10, 90),
+                Temperature = GenerateRandom.RandomNum(15, 70),
 
                 Geolocation = new Location()
                 {
@@ -61,9 +61,9 @@ namespace AEMS.Simulator.Core
                 },
                 Magnetometer = new Coordinate()
                 {
-                    x = (decimal)40.21,
-                    y = (decimal)-112.67,
-                    z = (decimal)-40.24
+                    x = GenerateRandom.RandomNum(-200, 200),
+                    y = GenerateRandom.RandomNum(-200, 200),
+                    z = GenerateRandom.RandomNum(-200, 200)
                 },
                 MeterType = "3S",
                 Version = 1.0F,

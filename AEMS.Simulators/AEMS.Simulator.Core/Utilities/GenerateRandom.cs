@@ -15,6 +15,5 @@ namespace AEMS.Simulator.Core
         {
             return Random.Next(max, min);
         }
-
     }
 }
