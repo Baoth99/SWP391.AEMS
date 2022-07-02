@@ -1,9 +1,11 @@
 ﻿using AEMS.Utilities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AEMS.WebApi.SystemConfigurations
@@ -40,12 +42,23 @@ namespace AEMS.WebApi.SystemConfigurations
 
                     var securityScheme = new OpenApiSecurityScheme()
                     {
-                        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                        Name = "Authorization",
-                        In = ParameterLocation.Header,
-                        Type = SecuritySchemeType.Http,
-                        Scheme = "bearer",
-                        BearerFormat = "JWT" // Optional
+                        Type = SecuritySchemeType.OAuth2,
+                        //Description = "Authorization ",
+                        Name = "Aad Authorization",
+                        In = ParameterLocation.Header,  
+                        Scheme = JwtBearerDefaults.AuthenticationScheme,
+                        BearerFormat = "JWT",
+                        Flows = new OpenApiOAuthFlows()
+                        {
+                            Implicit = new OpenApiOAuthFlow()
+                            {
+                                AuthorizationUrl = new Uri($"{AppSettingValues.AadInstance}{AppSettingValues.AadTenantId}/oauth2/v2.0/authorize"),
+                                TokenUrl = new Uri($"{AppSettingValues.AadInstance}{AppSettingValues.AadTenantId}/oauth2/v2.0/token"),
+                                Scopes = new Dictionary<string, string> {
+                                    {$"api://{AppSettingValues.AadClientId}/UserAccess", "UserAccess" }
+                                }
+                            }
+                        }
                     };
                     var securityRequirement = new OpenApiSecurityRequirement
                         {
@@ -55,14 +68,17 @@ namespace AEMS.WebApi.SystemConfigurations
                                     Reference = new OpenApiReference
                                     {
                                         Type = ReferenceType.SecurityScheme,
-                                        Id = "bearerAuth"
-                                    }
+                                        Id = "oauth2"
+                                    },
+                                    Scheme = "oauth2",
+                                    Name = "FU.SWP391.AEMSToken",
+                                    In = ParameterLocation.Header
                                 },
-                                new string[] {}
+                                new string[] { $"api://{AppSettingValues.AadClientId}/UserAcess"}
                             }
                         };
-
-                    c.AddSecurityDefinition("bearerAuth", securityScheme);
+                    //https://localhost:44356/swagger/oauth2-redirect.html
+                    c.AddSecurityDefinition("oauth2", securityScheme);
                     c.AddSecurityRequirement(securityRequirement);
                 });
             }
@@ -84,6 +100,10 @@ namespace AEMS.WebApi.SystemConfigurations
                     {
                         c.SwaggerEndpoint(item.UrlDefination, $"{item.Title} {item.Version}");
                     }
+                    c.OAuthClientId(AppSettingValues.AadClientId);
+                    c.OAuthClientSecret(AppSettingValues.AadClientSecret);
+                    //c.OAuthUseBasicAuthenticationWithAccessCodeGrant();
+                    c.OAuthScopeSeparator(" ");
                 });
             }
         }
